@@ -68,76 +68,130 @@
 </div>
 
 
-<!-- BULK BILLING -->
+<!-- BILLING OVERVIEW -->
+<section class="section" style="background:var(--white); padding-bottom:0">
+  <div class="container">
+    <div class="section-header fade-up" style="margin-bottom:2rem">
+      <span class="eyebrow">How We Bill</span>
+      <h2>Transparent, Straightforward Pricing</h2>
+      <p>We aim to make healthcare as accessible as possible. Many services are bulk-billed, and we offer concession discounts. If you're unsure about costs before your appointment, just ask at reception.</p>
+    </div>
+    <div class="billing-overview fade-up">
+      <div class="billing-card billing-bulk">
+        <div class="billing-card-icon">✅</div>
+        <h3>Bulk Billed</h3>
+        <p>Many services have no out-of-pocket cost — Medicare covers the full fee for eligible patients and services.</p>
+      </div>
+      <div class="billing-card billing-private">
+        <div class="billing-card-icon">💳</div>
+        <h3>Private Billing</h3>
+        <p>Standard fees apply for most consultations. We process your Medicare rebate immediately — in most cases before you leave.</p>
+      </div>
+      <div class="billing-card billing-concession">
+        <div class="billing-card-icon">🎖️</div>
+        <h3>Concession Discount</h3>
+        <p>Pension and concession card holders receive a substantial discount on appointments that are not bulk-billed. Present your card at reception.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONSULTATION FEES TABLE -->
+<section class="section" style="background:var(--white)" id="consultFeeSection">
+  <div class="container">
+    <div class="fees-table-wrap fade-up">
+      <div class="fees-table-header">
+        <div>
+          <span class="eyebrow">Standard Rates</span>
+          <h2>Consultation Fees</h2>
+        </div>
+        <p class="fees-table-note">Fees vary by the length and complexity of your appointment. Medicare rebates are processed on the spot — usually before you leave the building.</p>
+      </div>
+
+      <div class="consult-table-scroll">
+        <table class="consult-table" id="consultTable">
+          <thead>
+            <tr>
+              <th class="col-type">Consultation Type</th>
+              <th class="col-fee">Total Fee</th>
+              <th class="col-rebate">Medicare Rebate</th>
+              <th class="col-gap">Your Gap</th>
+            </tr>
+          </thead>
+          <tbody id="consultTableBody">
+            <!-- Populated by JS -->
+            <tr class="consult-loading"><td colspan="4">Loading fee schedule…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fees-footer-row">
+        <p id="feeNoticeText" style="display:none"></p>
+        <p class="fees-disclaimer">Fees are subject to change. Additional charges may apply for procedures such as ECG, lung function testing, or skin treatments. Please contact reception for the most current pricing.</p>
+        <p id="feeUpdatedText" style="display:none; font-size:.75rem; color:#94a3b8; margin-top:.25rem"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BULK-BILLED SERVICES -->
+<section class="section" style="background:var(--light)">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="eyebrow">No Out-of-Pocket Cost</span>
+      <h2>Bulk-Billed Services</h2>
+      <p>The following services are bulk-billed for all eligible patients — Medicare covers the full fee.</p>
+    </div>
+    <div class="bulk-check-grid fade-up" id="bulkBillGrid">
+      <!-- Populated by JS, static fallback below -->
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Children's scheduled immunisations</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>WorkCover appointments</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Veteran's Affairs (DVA) appointments</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Most GP Management Plans (GPMP)</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Team Care Arrangements (TCA)</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Mental Health Treatment Plans</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>3–4 monthly chronic disease checkups</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>Over-75 health checks</div>
+      <div class="bulk-check-item"><span class="bci-tick">✓</span>ATSI health checks and chronic disease management</div>
+    </div>
+    <p class="bulk-cta-note fade-up">Not sure if your appointment is bulk-billed? <strong>Call us on <a href="tel:0755411422">(07) 5541 1422</a></strong> and we'll let you know before you come in.</p>
+  </div>
+</section>
+
+
+<!-- EXTRA INFO CARDS -->
 <section class="section" style="background:var(--white)">
   <div class="container">
+    <div class="fees-extras-grid">
 
-    <div class="bulk-bill-band fade-up">
-      <h3>✅ Bulk-Billed Services</h3>
-      <p>BMC bulk-bills the following services — meaning no out-of-pocket cost to you for these appointments:</p>
-      <ul id="bulkBillList">
-        <li>Children's scheduled immunisations</li>
-        <li>WorkCover appointments</li>
-        <li>Veteran's Affairs (DVA) appointments</li>
-        <li>Most GP Management Plans (GPMP)</li>
-        <li>Team Care Arrangements (TCA)</li>
-        <li>Mental Health Treatment Plans</li>
-        <li>3–4 monthly chronic disease checkups (for eligible patients on plans)</li>
-        <li>Over-75 health checks</li>
-        <li>ATSI health checks and chronic disease management</li>
-      </ul>
-    </div>
-
-    <!-- Dynamic fee schedule (populated from /api/fees) -->
-    <div id="feeScheduleWrap" style="display:none; margin-bottom:2rem">
-      <div class="fee-schedule-band fade-up">
-        <h3>💲 Current Fee Schedule</h3>
-        <p id="feeScheduleIntro" style="margin-bottom:1.25rem;color:var(--grey);font-size:.9rem"></p>
-        <table class="fee-table" id="feeTable">
-          <thead><tr><th>Service</th><th style="text-align:right">Fee</th></tr></thead>
-          <tbody id="feeTableBody"></tbody>
-        </table>
-        <p id="feeNotice" style="margin-top:1rem;font-size:.875rem;color:var(--grey)"></p>
-        <p id="feeUpdated" style="margin-top:.5rem;font-size:.75rem;color:#94a3b8"></p>
-      </div>
-    </div>
-
-    <div class="fees-grid">
-      <div class="fee-card fade-up">
-        <div class="fee-card-icon">💳</div>
-        <h3>Pensioner Discounts</h3>
-        <p>We offer a substantial discount for pensioners whose appointments are not one of the types we bulk-bill.</p>
-        <p>Please present your concession card at reception when you arrive. If you're not sure whether you qualify, our reception team is happy to help.</p>
-      </div>
-
-      <div class="fee-card fade-up">
-        <div class="fee-card-icon">⚖️</div>
-        <h3>Standard Fees &amp; Gaps</h3>
-        <p>Fees vary according to the duration and complexity of your time with your doctor, and whether additional services are required — such as ECG, lung function testing or freezing of skin spots.</p>
-        <p>We process your Medicare rebate immediately — in most cases before you leave the building.</p>
-      </div>
-
-      <div class="fee-card fade-up">
-        <div class="fee-card-icon">💰</div>
+      <div class="fee-extra-card fade-up">
+        <div class="fec-icon">💰</div>
         <h3>Ways to Pay</h3>
-        <p>We accept the following payment methods:</p>
-        <div class="payment-methods">
+        <p>We accept cash, credit card, debit card and EFTPOS. Medicare rebates are processed on the spot — directly back to your debit card or bank account via EFTPOS.</p>
+        <div class="payment-methods" style="margin-top:1rem">
           <span class="payment-chip">💵 Cash</span>
           <span class="payment-chip">💳 Credit Card</span>
           <span class="payment-chip">💳 Debit Card</span>
           <span class="payment-chip">🏦 EFTPOS</span>
         </div>
-        <p style="margin-top:1rem">Medicare rebates are processed straight away — via debit card back into a cheque or savings account, or electronically into your bank account.</p>
       </div>
 
-      <div class="fee-card fade-up">
-        <div class="fee-card-icon">🐄</div>
-        <h3>Q Fever</h3>
-        <p>Special pricing applies to Q fever testing and immunisation (two visits required). Please check with reception when booking.</p>
-        <p>Employer enquiries for group testing and immunisation: <a href="mailto:manager@beaumed.com.au" style="color:var(--blue);font-weight:600">manager@beaumed.com.au</a></p>
+      <div class="fee-extra-card fade-up">
+        <div class="fec-icon">🐄</div>
+        <h3>Q Fever Testing &amp; Immunisation</h3>
+        <p>Special pricing applies to Q fever testing and immunisation — two visits are required. Please mention this when booking so we can allow the right amount of time.</p>
+        <p style="margin-top:.75rem">Employer enquiries for group testing: <a href="mailto:manager@beaumed.com.au" style="color:var(--blue);font-weight:600">manager@beaumed.com.au</a></p>
       </div>
+
+      <div class="fee-extra-card fade-up">
+        <div class="fec-icon">📋</div>
+        <h3>WorkCover &amp; DVA</h3>
+        <p>WorkCover and Department of Veterans' Affairs (DVA Gold Card) appointments are bulk-billed. Please bring your relevant card or claim number to your appointment.</p>
+      </div>
+
     </div>
-
   </div>
 </section>
 
@@ -147,17 +201,21 @@
   <div class="container">
     <div class="section-header fade-up">
       <span class="eyebrow">Medicare</span>
-      <h2>Medicare &amp; Chronic Disease Plans</h2>
-      <p>Understanding your Medicare entitlements can significantly reduce the cost of your healthcare.</p>
+      <h2>Chronic Disease Plans &amp; Care Arrangements</h2>
+      <p>Understanding your Medicare entitlements can significantly reduce the cost of your long-term healthcare.</p>
     </div>
-    <div style="max-width:860px; margin:0 auto">
-      <div class="medicare-info fade-up">
-        <h3>What is a GP Management Plan?</h3>
-        <p>If you have a disease or condition that will be present for more than 6 months, or that is terminal, you may be eligible for a <strong>Chronic Disease Plan (GP Management Plan)</strong>.</p>
-        <p>Patients on plans can have a regular checkup every 3–6 months, and BMC bulk-bills for these because Medicare pays better rebates for staying well-organised.</p>
-        <p>If you need treatment from 2 or more health professionals, you may be eligible for a <strong>Team Care Arrangement (TCA)</strong>. This involves a regular checkup every 3–6 months and offers better Medicare rebates when your care is coordinated.</p>
-        <p>If you are on a Team Care Arrangement, Medicare rebates for <strong>up to 5 allied health visits per year</strong> are available to you — including physiotherapy, dietetics, podiatry and psychology. Your doctor or nurse will authorise these at your regular checkup.</p>
-        <p>To register your bank account details with Medicare for direct rebate payments, call the Medicare general enquiries line on <strong>132 011</strong> (24 hours a day), or visit a service centre, or register through myGov / Express Plus Medicare app.</p>
+    <div class="medicare-cards fade-up">
+      <div class="medicare-card">
+        <h4>GP Management Plan (GPMP)</h4>
+        <p>If you have a condition that will last more than 6 months, or is terminal, you may be eligible for a <strong>GP Management Plan</strong>. Regular checkups every 3–6 months are bulk-billed — Medicare pays better rebates for keeping your health well-managed.</p>
+      </div>
+      <div class="medicare-card">
+        <h4>Team Care Arrangement (TCA)</h4>
+        <p>If you need treatment from 2 or more health professionals, a <strong>Team Care Arrangement</strong> coordinates your care and unlocks Medicare rebates for <strong>up to 5 allied health visits per year</strong> — including physio, dietetics, podiatry and psychology.</p>
+      </div>
+      <div class="medicare-card">
+        <h4>Registering Your Bank Account</h4>
+        <p>To receive Medicare rebates directly to your bank account, call <strong>132 011</strong> (24 hrs), visit a Medicare service centre, or register via <strong>myGov</strong> or the <strong>Express Plus Medicare</strong> app.</p>
       </div>
     </div>
   </div>
@@ -219,43 +277,62 @@
 </footer>
 
 <script>
-// ── Dynamic fees loading ──────────────────────────────────────
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 (async function loadFees() {
   try {
     const r    = await fetch('/api/fees');
     const data = await r.json();
 
-    // Bulk-billed list
-    if (data.bulkBilledItems && data.bulkBilledItems.length) {
-      const ul = document.getElementById('bulkBillList');
-      ul.innerHTML = data.bulkBilledItems.map(i => `<li>${esc(i)}</li>`).join('');
+    // ── Consultation fees table ───────────────────────────────
+    const tbody = document.getElementById('consultTableBody');
+    if (data.standardFees && data.standardFees.length > 0) {
+      tbody.innerHTML = data.standardFees.filter(f => f.name).map(f => {
+        // Support both old {name,amount} and new {name,fee,rebate,gap} formats
+        const fee    = f.fee    || f.amount || '';
+        const rebate = f.rebate || '';
+        const gap    = f.gap    || '';
+        const feeCell    = fee    ? `<strong>${esc(fee)}</strong>`    : `<span class="fee-tbc">Contact reception</span>`;
+        const rebateCell = rebate ? esc(rebate) : (fee ? `<span class="fee-tbc">—</span>` : `<span class="fee-tbc">—</span>`);
+        const gapCell    = gap    ? `<strong class="gap-amount">${esc(gap)}</strong>` : (fee ? `<span class="fee-tbc">—</span>` : `<span class="fee-tbc">Contact reception</span>`);
+        return `<tr>
+          <td class="col-type">${esc(f.name)}</td>
+          <td class="col-fee">${feeCell}</td>
+          <td class="col-rebate">${rebateCell}</td>
+          <td class="col-gap">${gapCell}</td>
+        </tr>`;
+      }).join('');
+    } else {
+      tbody.innerHTML = `<tr class="consult-loading"><td colspan="4">Please contact reception for current fee information on <a href="tel:0755411422">(07) 5541 1422</a>.</td></tr>`;
     }
 
-    // Standard fees table — show whenever entries exist, even if amounts are blank
-    if (data.standardFees && data.standardFees.length > 0) {
-      const tbody = document.getElementById('feeTableBody');
-      tbody.innerHTML = data.standardFees
-        .filter(f => f.name)
-        .map(f => `<tr><td>${esc(f.name)}</td><td style="text-align:right;font-weight:600">${esc(f.amount||'—')}</td></tr>`)
-        .join('');
-      document.getElementById('feeScheduleIntro').textContent =
-        'Fees vary by the length and complexity of your consultation. We process your Medicare rebate immediately in most cases. Please contact reception for current pricing.';
-      if (data.notice) {
-        document.getElementById('feeNotice').textContent = data.notice;
-      }
-      if (data.lastUpdated) {
-        document.getElementById('feeUpdated').textContent = 'Fee schedule last updated: ' + data.lastUpdated;
-      }
-      document.getElementById('feeScheduleWrap').style.display = '';
+    // Notice and last updated
+    if (data.notice) {
+      const n = document.getElementById('feeNoticeText');
+      n.textContent = data.notice; n.style.display = '';
     }
+    if (data.lastUpdated) {
+      const u = document.getElementById('feeUpdatedText');
+      u.textContent = 'Fee schedule last updated: ' + data.lastUpdated;
+      u.style.display = '';
+    }
+
+    // ── Bulk-billed grid ──────────────────────────────────────
+    if (data.bulkBilledItems && data.bulkBilledItems.length) {
+      document.getElementById('bulkBillGrid').innerHTML =
+        data.bulkBilledItems.map(i =>
+          `<div class="bulk-check-item"><span class="bci-tick">✓</span>${esc(i)}</div>`
+        ).join('');
+    }
+
   } catch(e) {
     console.error('Fees load failed', e);
+    const tbody = document.getElementById('consultTableBody');
+    if (tbody) tbody.innerHTML = `<tr class="consult-loading"><td colspan="4">Please contact reception for current fee information.</td></tr>`;
   }
 })();
-
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
 </script>
 <script src="main.js"></script>
 </body>

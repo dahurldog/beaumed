@@ -800,53 +800,161 @@ footer { background: var(--navy-dark); color: rgba(255,255,255,.6); padding: 4.5
 /* ============================================================
    FEES PAGE
 ============================================================ */
-.bulk-bill-band {
-  background: linear-gradient(135deg, rgba(22,163,74,.09), rgba(22,163,74,.04));
-  border: 1px solid rgba(22,163,74,.25); border-radius: var(--radius-lg);
-  padding: 2.5rem; margin-bottom: 3rem;
+
+/* Billing overview — 3 cards */
+.billing-overview {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  margin-top: 2.5rem; margin-bottom: 0;
 }
-.bulk-bill-band h3 { color: #15803D; font-size: 1.3rem; margin-bottom: 1rem; }
-.bulk-bill-band p { color: #374151; font-size: .9rem; line-height: 1.75; margin-bottom: .75rem; }
-.bulk-bill-band ul { color: #374151; font-size: .9rem; line-height: 1.75; padding-left: 1.25rem; list-style: disc; }
-.bulk-bill-band ul li { margin-bottom: .4rem; }
-.fees-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1.75rem; margin-bottom: 3rem;
+.billing-card {
+  border-radius: var(--radius-lg); padding: 2rem 1.75rem;
+  border: 1.5px solid var(--border); background: var(--white);
+  border-top-width: 4px;
 }
-.fee-card {
+.billing-bulk    { border-top-color: #22c55e; }
+.billing-private { border-top-color: var(--blue); }
+.billing-concession { border-top-color: #f59e0b; }
+.billing-card-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+.billing-card h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: .6rem; }
+.billing-card p  { font-size: .875rem; color: var(--grey); line-height: 1.75; }
+
+/* Consultation fee table */
+.fees-table-wrap {
   background: var(--white); border-radius: var(--radius-lg);
-  padding: 2rem; box-shadow: var(--shadow); border: 1px solid var(--border);
+  border: 1.5px solid var(--border); overflow: hidden;
+  box-shadow: var(--shadow);
 }
-.fee-card-icon { font-size: 2rem; margin-bottom: 1rem; }
-.fee-card h3 { color: var(--navy); margin-bottom: .75rem; }
-.fee-card p { color: var(--grey); font-size: .875rem; line-height: 1.75; margin-bottom: .625rem; }
-.fee-card p:last-child { margin-bottom: 0; }
-.payment-methods { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+.fees-table-header {
+  padding: 2rem 2.5rem 0; display: flex; flex-wrap: wrap;
+  gap: 1rem; align-items: flex-start; justify-content: space-between;
+  border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 0;
+}
+.fees-table-header h2 { margin: .25rem 0 0; }
+.fees-table-note {
+  max-width: 460px; font-size: .85rem; color: var(--grey);
+  line-height: 1.65; margin: 0; padding-top: .5rem;
+}
+.consult-table-scroll { overflow-x: auto; }
+.consult-table {
+  width: 100%; border-collapse: collapse; font-size: .9rem;
+}
+.consult-table thead tr {
+  background: #f8fafc; border-bottom: 2px solid var(--border);
+}
+.consult-table th {
+  padding: 1rem 1.5rem; text-align: left; font-size: .72rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--grey); white-space: nowrap;
+}
+.consult-table th.col-fee,
+.consult-table th.col-rebate,
+.consult-table th.col-gap { text-align: right; }
+.consult-table th.col-gap { color: var(--navy); }
+.consult-table td {
+  padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border);
+  color: var(--text); vertical-align: middle;
+}
+.consult-table tr:last-child td { border-bottom: none; }
+.consult-table tr:hover td { background: rgba(0,174,239,.03); }
+.consult-table td.col-type { font-weight: 600; color: var(--navy); }
+.consult-table td.col-fee,
+.consult-table td.col-rebate,
+.consult-table td.col-gap { text-align: right; }
+.consult-table td.col-gap {
+  background: rgba(0,174,239,.04);
+}
+.consult-table td.col-gap strong,
+.gap-amount { color: var(--navy); }
+.fee-tbc { color: #9ca3af; font-style: italic; font-size: .85rem; }
+.consult-loading td {
+  text-align: center; color: var(--grey); font-size: .9rem;
+  padding: 2rem; font-style: italic;
+}
+.consult-loading td a { color: var(--blue); }
+.fees-footer-row {
+  padding: 1.25rem 2.5rem; background: #fafafa;
+  border-top: 1px solid var(--border);
+}
+.fees-disclaimer {
+  font-size: .8rem; color: #9ca3af; line-height: 1.6; margin: 0;
+}
+#feeNoticeText {
+  font-size: .875rem; color: var(--grey); margin-bottom: .5rem;
+  font-style: italic;
+}
+
+/* Bulk-billed checklist */
+.bulk-check-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: .75rem 2rem; margin-bottom: 2rem;
+}
+.bulk-check-item {
+  display: flex; align-items: flex-start; gap: .65rem;
+  font-size: .9rem; color: var(--text); line-height: 1.5;
+}
+.bci-tick {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #dcfce7; color: #16a34a; font-size: .75rem;
+  font-weight: 800; flex-shrink: 0; margin-top: .1rem;
+}
+.bulk-cta-note {
+  font-size: .9rem; color: var(--grey); margin-top: .5rem;
+  padding-top: 1.5rem; border-top: 1px solid var(--border);
+}
+.bulk-cta-note a { color: var(--blue); }
+
+/* Extra info cards (ways to pay, Q fever, WorkCover) */
+.fees-extras-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.fee-extra-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem; border: 1.5px solid var(--border);
+}
+.fec-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+.fee-extra-card h3 { color: var(--navy); font-size: 1rem; margin-bottom: .75rem; }
+.fee-extra-card p { color: var(--grey); font-size: .875rem; line-height: 1.75; }
+.payment-methods { display: flex; flex-wrap: wrap; gap: .6rem; }
 .payment-chip {
   background: var(--light); border: 1px solid var(--border);
-  border-radius: 50px; padding: .45rem 1.1rem;
-  font-size: .8rem; font-weight: 600; color: var(--navy);
+  border-radius: 50px; padding: .4rem 1rem;
+  font-size: .78rem; font-weight: 600; color: var(--navy);
 }
-.fee-schedule-band {
-  background: linear-gradient(135deg, rgba(0,174,239,.08), rgba(0,174,239,.03));
-  border: 1px solid rgba(0,174,239,.25); border-radius: var(--radius-lg);
-  padding: 2.5rem; margin-bottom: 0;
-}
-.fee-schedule-band h3 { color: var(--navy); font-size: 1.3rem; margin-bottom: .5rem; }
-.fee-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
-.fee-table th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--grey); padding: .5rem .75rem; border-bottom: 2px solid var(--border); }
-.fee-table td { padding: .625rem .75rem; border-bottom: 1px solid var(--border); color: var(--text); }
-.fee-table tr:last-child td { border-bottom: none; }
-.fee-table tr:hover td { background: rgba(0,174,239,.04); }
 
-.medicare-info {
-  background: var(--navy-dark); border-radius: var(--radius-lg);
-  padding: 2.5rem; color: rgba(255,255,255,.8);
+/* Medicare cards */
+.medicare-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
 }
-.medicare-info h3 { color: var(--white); margin-bottom: 1rem; }
-.medicare-info p { font-size: .9rem; line-height: 1.8; margin-bottom: .875rem; }
-.medicare-info p:last-child { margin-bottom: 0; }
-.medicare-info strong { color: #93D9F6; }
+.medicare-card {
+  background: var(--navy-dark); border-radius: var(--radius-lg);
+  padding: 2rem; color: rgba(255,255,255,.8);
+}
+.medicare-card h4 {
+  color: var(--white); font-size: 1rem; margin-bottom: .875rem;
+  padding-bottom: .75rem; border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.medicare-card p { font-size: .875rem; line-height: 1.8; }
+.medicare-card strong { color: #93D9F6; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .billing-overview { grid-template-columns: 1fr; }
+  .fees-extras-grid { grid-template-columns: 1fr; }
+  .medicare-cards { grid-template-columns: 1fr; }
+  .bulk-check-grid { grid-template-columns: 1fr; }
+  .fees-table-header { flex-direction: column; }
+  .fees-table-note { max-width: 100%; }
+}
+@media (max-width: 640px) {
+  .fees-table-header { padding: 1.5rem 1.25rem 1.25rem; }
+  .consult-table th, .consult-table td { padding: .875rem 1rem; }
+  .fees-footer-row { padding: 1rem 1.25rem; }
+  .fees-table-wrap { border-radius: var(--radius); }
+  /* Hide rebate column on very small screens to keep table clean */
+  .consult-table .col-rebate { display: none; }
+}
 
 
 /* ============================================================

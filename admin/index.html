@@ -68,10 +68,19 @@
           <h3>Standard Consultation Fees</h3>
         </div>
         <div class="card-body">
+          <div class="fee-col-labels">
+            <span class="fcl-name">Consultation Type</span>
+            <span class="fcl-amt">Total Fee</span>
+            <span class="fcl-amt">Medicare Rebate</span>
+            <span class="fcl-amt">Out-of-pocket Gap</span>
+            <span class="fcl-del"></span>
+          </div>
           <div id="standardFeeList"></div>
-          <div class="add-row" id="addStdRow">
-            <input type="text" id="newStdName" placeholder="Fee description">
-            <input type="text" id="newStdAmt" placeholder="Amount (e.g. $75.00)" class="amount-in">
+          <div class="add-row add-row-fees" id="addStdRow">
+            <input type="text"   id="newStdName"    placeholder="e.g. Standard consultation (10–20 min)" class="fee-name-in">
+            <input type="text"   id="newStdFee"     placeholder="e.g. $120.00" class="amount-in">
+            <input type="text"   id="newStdRebate"  placeholder="e.g. $82.90"  class="amount-in">
+            <input type="text"   id="newStdGap"     placeholder="e.g. $37.10"  class="amount-in">
             <button class="btn btn-primary btn-sm" onclick="addStdFee()">+ Add</button>
           </div>
         </div>
@@ -344,7 +353,7 @@ function renderFees() {
   const sl = document.getElementById('standardFeeList');
   sl.innerHTML = '';
   (feesData.standardFees || []).forEach((f, i) => {
-    sl.appendChild(feeRow(f.name, f.amount, i, 'std'));
+    sl.appendChild(feeRow(f, i));
   });
 
   // Bulk-billed
@@ -363,12 +372,18 @@ function renderFees() {
   markFeeClean();
 }
 
-function feeRow(name, amount, idx, type) {
+function feeRow(f, idx) {
+  // Support old {name,amount} and new {name,fee,rebate,gap} formats
+  const fee    = f.fee    != null ? f.fee    : (f.amount || '');
+  const rebate = f.rebate || '';
+  const gap    = f.gap    || '';
   const row = document.createElement('div');
-  row.className = 'fee-item';
+  row.className = 'fee-item fee-item-4col';
   row.innerHTML = `
-    <input class="fee-item-name"   value="${esc(name)}"   placeholder="Description" oninput="setStdField(${idx},'name',this.value)">
-    <input class="fee-item-amount" value="${esc(amount)}" placeholder="Amount"      oninput="setStdField(${idx},'amount',this.value)">
+    <input class="fee-name-in"  value="${esc(f.name)}" placeholder="Consultation type" oninput="setStdField(${idx},'name',this.value)">
+    <input class="amount-in"    value="${esc(fee)}"    placeholder="e.g. $120.00"      oninput="setStdField(${idx},'fee',this.value)">
+    <input class="amount-in"    value="${esc(rebate)}" placeholder="e.g. $82.90"       oninput="setStdField(${idx},'rebate',this.value)">
+    <input class="amount-in"    value="${esc(gap)}"    placeholder="e.g. $37.10"       oninput="setStdField(${idx},'gap',this.value)">
     <button class="remove-btn" onclick="removeStd(${idx})" title="Remove">&#215;</button>`;
   return row;
 }
@@ -386,11 +401,15 @@ function removeBulk(i) { feesData.bulkBilledItems.splice(i, 1); renderFees(); ma
 
 function addStdFee() {
   const n = document.getElementById('newStdName').value.trim();
-  const a = document.getElementById('newStdAmt').value.trim();
+  const f = document.getElementById('newStdFee').value.trim();
+  const r = document.getElementById('newStdRebate').value.trim();
+  const g = document.getElementById('newStdGap').value.trim();
   if (!n) return;
-  feesData.standardFees.push({ name: n, amount: a });
-  document.getElementById('newStdName').value = '';
-  document.getElementById('newStdAmt').value  = '';
+  feesData.standardFees.push({ name: n, fee: f, rebate: r, gap: g });
+  document.getElementById('newStdName').value   = '';
+  document.getElementById('newStdFee').value    = '';
+  document.getElementById('newStdRebate').value = '';
+  document.getElementById('newStdGap').value    = '';
   renderFees(); markFeeDirty();
 }
 function addBulkItem() {
