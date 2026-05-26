@@ -181,14 +181,111 @@ app.post('/api/careers', async (req, res) => {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  // Receipt email sent back to the applicant
+  const receiptHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body { margin:0; padding:0; background:#f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+  .wrap { max-width:600px; margin:32px auto; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,.08); }
+  .header { background:#003865; padding:32px 36px; text-align:center; }
+  .header .tick { font-size:2.5rem; margin-bottom:12px; }
+  .header h1 { margin:0; color:#fff; font-size:22px; font-weight:700; letter-spacing:-.3px; }
+  .header p { margin:8px 0 0; color:rgba(255,255,255,.75); font-size:14px; }
+  .body { padding:32px 36px; }
+  .greeting { font-size:16px; color:#0f172a; margin-bottom:16px; line-height:1.6; }
+  .summary-box { background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:20px 24px; margin:24px 0; }
+  .summary-box h3 { margin:0 0 14px; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#0369a1; }
+  .summary-row { display:flex; gap:8px; margin-bottom:10px; font-size:14px; }
+  .summary-row:last-child { margin-bottom:0; }
+  .summary-label { color:#64748b; font-weight:600; min-width:80px; }
+  .summary-value { color:#0f172a; }
+  .next-steps { margin:24px 0; }
+  .next-steps h3 { font-size:14px; font-weight:700; color:#334155; margin:0 0 12px; }
+  .step { display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; }
+  .step-num { background:#003865; color:#fff; font-size:11px; font-weight:700; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+  .step p { margin:0; font-size:14px; color:#475569; line-height:1.5; }
+  .divider { border:none; border-top:1px solid #e2e8f0; margin:24px 0; }
+  .contact-strip { display:flex; gap:16px; flex-wrap:wrap; }
+  .contact-item { flex:1; min-width:160px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:14px 16px; }
+  .contact-item .clabel { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:#94a3b8; margin-bottom:4px; }
+  .contact-item a { font-size:14px; font-weight:600; color:#003865; text-decoration:none; }
+  .footer { background:#f8fafc; border-top:1px solid #e2e8f0; padding:18px 36px; text-align:center; }
+  .footer p { margin:0 0 4px; font-size:11px; color:#94a3b8; }
+  .footer p:last-child { margin:0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="tick">✅</div>
+    <h1>We've received your expression of interest!</h1>
+    <p>Beaudesert Medical Centre — Careers</p>
+  </div>
+  <div class="body">
+    <p class="greeting">Hi ${esc(firstname.trim())},<br><br>
+    Thanks for reaching out — we've received your expression of interest for the <strong>${esc(role)}</strong> position and our practice manager will be reviewing it shortly.</p>
+
+    <div class="summary-box">
+      <h3>Your Submission</h3>
+      <div class="summary-row"><span class="summary-label">Name</span><span class="summary-value">${esc(fullName)}</span></div>
+      <div class="summary-row"><span class="summary-label">Role</span><span class="summary-value">${esc(role)}</span></div>
+      <div class="summary-row"><span class="summary-label">Email</span><span class="summary-value">${esc(email)}</span></div>
+      <div class="summary-row"><span class="summary-label">Phone</span><span class="summary-value">${phone ? esc(phone) : '—'}</span></div>
+      <div class="summary-row"><span class="summary-label">Submitted</span><span class="summary-value">${esc(submitted)}</span></div>
+    </div>
+
+    <div class="next-steps">
+      <h3>What happens next?</h3>
+      <div class="step"><div class="step-num">1</div><p>Our practice manager will review your expression of interest, usually within <strong>2–3 business days</strong>.</p></div>
+      <div class="step"><div class="step-num">2</div><p>If there's a good fit — either now or when a position opens up — we'll be in touch directly by email or phone.</p></div>
+      <div class="step"><div class="step-num">3</div><p>In the meantime, feel free to call us if you have any questions.</p></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="contact-strip">
+      <div class="contact-item">
+        <div class="clabel">Phone</div>
+        <a href="tel:0755411422">(07) 5541 1422</a>
+      </div>
+      <div class="contact-item">
+        <div class="clabel">Email</div>
+        <a href="mailto:manager@beaumed.com.au">manager@beaumed.com.au</a>
+      </div>
+      <div class="contact-item">
+        <div class="clabel">Address</div>
+        <a href="https://maps.google.com/?q=47+William+St+Beaudesert">47 William St, Beaudesert</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <p><strong>Beaudesert Medical Centre</strong> · 47 William Street, Beaudesert QLD 4285</p>
+    <p>This is an automated confirmation. Please do not reply to this email — contact us at the details above.</p>
+  </div>
+</div>
+</body>
+</html>`;
+
   try {
+    // Send notification to practice (testing: routed to personal Gmail)
     await transporter.sendMail({
       from:    `"BMC Website" <${process.env.SMTP_USER || 'noreply@beaumed.com.au'}>`,
-      to:      'manager@beaumed.com.au',
+      to:      process.env.CAREERS_TO || 'mikehurley84@gmail.com',
       replyTo: email,
       subject: `Expression of Interest — ${role} — ${fullName}`,
       html
     });
+
+    // Send receipt confirmation to the applicant
+    await transporter.sendMail({
+      from:    `"Beaudesert Medical Centre" <${process.env.SMTP_USER || 'noreply@beaumed.com.au'}>`,
+      to:      email,
+      subject: `We've received your expression of interest — Beaudesert Medical Centre`,
+      html:    receiptHtml
+    });
+
     res.json({ ok: true });
   } catch (err) {
     console.error('Careers email error:', err);
