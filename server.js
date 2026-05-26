@@ -293,18 +293,35 @@ app.post('/api/careers', async (req, res) => {
   }
 });
 
+// ── Auth helpers ─────────────────────────────────────────────
+// If ADMIN_PASSWORD env var is set, it takes priority over the local config file.
+// This means the password survives every Render redeploy without needing a
+// persistent disk. Set it once in Render → Environment and you're done.
+const ENV_PW = process.env.ADMIN_PASSWORD || null;
+
+function checkPassword(attempt) {
+  if (ENV_PW) return attempt === ENV_PW;
+  const cfg = fs.existsSync(CONFIG_FILE) ? readJSON(CONFIG_FILE) : {};
+  return cfg.passwordHash ? bcrypt.compareSync(attempt, cfg.passwordHash) : false;
+}
+
+function isSetupComplete() {
+  if (ENV_PW) return true;
+  const cfg = fs.existsSync(CONFIG_FILE) ? readJSON(CONFIG_FILE) : {};
+  return !!cfg.setupComplete;
+}
+
 // ── Auth routes ──────────────────────────────────────────────
 app.get('/api/admin/status', (req, res) => {
-  const cfg = readJSON(CONFIG_FILE);
-  res.json({ authenticated: !!req.session.authenticated, setupComplete: cfg.setupComplete });
+  res.json({ authenticated: !!req.session.authenticated, setupComplete: isSetupComplete() });
 });
 
 app.post('/api/admin/setup', (req, res) => {
-  const cfg = readJSON(CONFIG_FILE);
-  if (cfg.setupComplete) return res.status(400).json({ error: 'Already configured' });
+  if (isSetupComplete()) return res.status(400).json({ error: 'Already configured' });
   const { password } = req.body;
   if (!password || password.length < 8)
     return res.status(400).json({ error: 'Password must be at least 8 characters' });
+  const cfg = fs.existsSync(CONFIG_FILE) ? readJSON(CONFIG_FILE) : {};
   cfg.passwordHash  = bcrypt.hashSync(password, 12);
   cfg.setupComplete = true;
   writeJSON(CONFIG_FILE, cfg);
@@ -313,9 +330,8 @@ app.post('/api/admin/setup', (req, res) => {
 });
 
 app.post('/api/admin/login', (req, res) => {
-  const cfg = readJSON(CONFIG_FILE);
-  if (!cfg.setupComplete) return res.status(400).json({ error: 'Not yet configured' });
-  if (bcrypt.compareSync(req.body.password, cfg.passwordHash)) {
+  if (!isSetupComplete()) return res.status(400).json({ error: 'Not yet configured' });
+  if (checkPassword(req.body.password)) {
     req.session.authenticated = true;
     res.json({ ok: true });
   } else {
@@ -328,6 +344,9 @@ app.post('/api/admin/logout', (req, res) => {
 });
 
 app.post('/api/admin/change-password', requireAuth, (req, res) => {
+  if (ENV_PW) {
+    return res.status(400).json({ error: 'Password is set via the ADMIN_PASSWORD environment variable on Render — update it there.' });
+  }
   const cfg = readJSON(CONFIG_FILE);
   const { current, newPassword } = req.body;
   if (!bcrypt.compareSync(current, cfg.passwordHash))
