@@ -316,9 +316,8 @@ function setAuthErr(msg) {
 async function showApp() {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('app').classList.add('visible');
-  await Promise.all([loadFees(), loadTeam()]);
 
-  // Tab switching
+  // Set up tabs FIRST — before any async work so an error can't prevent them working
   document.querySelectorAll('.nav-tab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
@@ -327,6 +326,8 @@ async function showApp() {
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
     });
   });
+
+  await Promise.all([loadFees(), loadTeam()]);
 }
 
 // ─────────────────────────────────────────────────────────────

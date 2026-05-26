@@ -231,15 +231,15 @@
       ul.innerHTML = data.bulkBilledItems.map(i => `<li>${esc(i)}</li>`).join('');
     }
 
-    // Standard fees table
-    if (data.standardFees && data.standardFees.some(f => f.amount)) {
+    // Standard fees table — show whenever entries exist, even if amounts are blank
+    if (data.standardFees && data.standardFees.length > 0) {
       const tbody = document.getElementById('feeTableBody');
       tbody.innerHTML = data.standardFees
         .filter(f => f.name)
         .map(f => `<tr><td>${esc(f.name)}</td><td style="text-align:right;font-weight:600">${esc(f.amount||'—')}</td></tr>`)
         .join('');
       document.getElementById('feeScheduleIntro').textContent =
-        'Fees vary by the length and complexity of your consultation. We process your Medicare rebate immediately in most cases.';
+        'Fees vary by the length and complexity of your consultation. We process your Medicare rebate immediately in most cases. Please contact reception for current pricing.';
       if (data.notice) {
         document.getElementById('feeNotice').textContent = data.notice;
       }

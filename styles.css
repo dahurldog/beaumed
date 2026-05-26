@@ -663,25 +663,35 @@ footer { background: var(--navy-dark); color: rgba(255,255,255,.6); padding: 4.5
 @media (max-width: 768px) {
   .nav-bottom, .nav-phone, .nav-book { display: none; }
   .hamburger { display: flex; }
-  #hero { padding-top: 87px; }
+  #hero { padding: 110px 0 3.5rem; }
   .page-hero { padding: 110px 0 3.5rem; }
   .info-bar-inner { grid-template-columns: 1fr; }
   .info-chip { border-right: none; border-bottom: 1px solid var(--border); }
   .info-chip:last-child { border-bottom: none; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; justify-content: center; }
-  .hero-stats { gap: 1.75rem; }
+  .hero-stats { gap: 1.25rem 1rem; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .contact-band-inner { flex-direction: column; text-align: center; }
+
+  /* Hero text scaling */
+  .hero-badge { font-size: .68rem; padding: .35rem .8rem; letter-spacing: .07em; white-space: normal; text-align: center; }
+  .hero-title { font-size: clamp(1.75rem, 6vw, 2.4rem); }
+  .hero-sub { font-size: 1rem; margin-bottom: 1.75rem; }
+  .stat-num { font-size: 1.5rem; }
 }
 @media (max-width: 480px) {
   .container { padding: 0 1rem; }
   .profile-photo, .photo-placeholder { height: 230px; }
   .book-card { padding: 2rem; }
   .careers-form { padding: 2rem; }
-  h1 { font-size: 2rem; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.4rem; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 1rem .75rem; }
+  .stat-num { font-size: 1.4rem; }
+  .section { padding: 3rem 0; }
 }
 
 
