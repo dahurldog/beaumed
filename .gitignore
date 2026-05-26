@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Admin password (generated on first run — never commit this)
+data/config.json
+
+# Uploaded photos (local only)
+uploads/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

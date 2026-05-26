@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the doctors and nurses at Beaudesert Medical Centre — experienced, caring and deeply committed to Beaudesert and the Scenic Rim.">
+  <title>Our Team | Beaudesert Medical Centre</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+      </a>
+      <div class="nav-top-actions">
+        <a href="tel:0755411422" class="nav-phone">📞 (07) 5541 1422</a>
+        <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="nav-book">📅 Book Online</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html" class="active">Our Team</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="fees.html">Fees</a></li>
+        <li><a href="careers.html">Work With Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="team.html" onclick="closeMenu()">Our Team</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="fees.html" onclick="closeMenu()">Fees</a>
+  <a href="careers.html" onclick="closeMenu()">Work With Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="m-book">📅 Book Online</a>
+</div>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-eyebrow">Meet the Team</div>
+      <h1>Our Team</h1>
+      <p>Experienced, caring and deeply committed to Beaudesert. Our doctors and nurses bring decades of combined expertise to every consultation.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- TEAM SECTION -->
+<section class="section" style="background: var(--white);">
+  <div class="container">
+
+    <div class="team-tabs fade-up">
+      <button class="tab-btn active" data-tab="doctors">Our Doctors</button>
+      <button class="tab-btn" data-tab="nurses">Our Nurses</button>
+      <button class="tab-btn" data-tab="allied">Allied Health</button>
+    </div>
+
+    <!-- Doctors panel -->
+    <div class="tab-panel active" id="tab-doctors">
+      <div class="team-grid" id="doctors-grid">
+        <div style="color:var(--grey);font-size:.875rem;padding:1rem">Loading…</div>
+      </div>
+    </div><!-- /tab-doctors -->
+
+    <!-- Nurses panel -->
+    <div class="tab-panel" id="tab-nurses">
+      <div class="team-grid" id="nurses-grid" style="max-width:740px; margin:0 auto; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+        <div style="color:var(--grey);font-size:.875rem;padding:1rem">Loading…</div>
+      </div>
+    </div><!-- /tab-nurses -->
+
+    <!-- Allied Health panel -->
+    <div class="tab-panel" id="tab-allied">
+
+      <div class="section-header" style="margin-bottom:2.5rem">
+        <span class="eyebrow">Onsite &amp; Independent</span>
+        <h2 style="color:var(--navy)">Allied Health at BMC</h2>
+        <p style="color:var(--grey)">BMC is home to a number of independent allied health providers. Patients on Chronic Disease Management plans may access funded visits — ask reception or your GP.</p>
+      </div>
+
+      <div class="allied-grid" id="allied-grid">
+        <div style="color:var(--grey);font-size:.875rem;padding:1rem">Loading…</div>
+      </div>
+
+      <div class="nearby-wrap fade-up">
+        <h3>Nearby Allied Health Partners</h3>
+        <p style="color:var(--grey);font-size:.875rem;margin-bottom:1.5rem">These independent providers are located nearby and work closely with our team. Your GP can provide referrals where needed.</p>
+        <div class="partner-grid">
+          <div class="partner-item">
+            <strong>Psychology</strong>
+            <span>Lavender House — <a href="tel:0755414411" style="color:var(--blue)">(07) 5541 4411</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Occupational Therapy (Paediatric)</strong>
+            <span>Caroline Hennessey — <a href="tel:0428154912" style="color:var(--blue)">0428 154 912</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Speech Pathology (Paediatric)</strong>
+            <span>Susan Short — <a href="tel:0437787262" style="color:var(--blue)">0437 787 262</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Speech Pathology</strong>
+            <span>Lorelle Savage — <a href="tel:0401195038" style="color:var(--blue)">0401 195 038</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Podiatry</strong>
+            <span>Mariete Nahuijsen — <a href="tel:0738092911" style="color:var(--blue)">(07) 3809 2911</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Optometry</strong>
+            <span>Scenic Rim Optometry — <a href="tel:0755419510" style="color:var(--blue)">(07) 5541 9510</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Optometry</strong>
+            <span>SpecSavers Beaudesert — <a href="tel:0755411177" style="color:var(--blue)">(07) 5541 1177</a></span>
+          </div>
+          <div class="partner-item">
+            <strong>Physiotherapy &amp; Rehab</strong>
+            <span>Absolute Physio — <a href="tel:0477020692" style="color:var(--blue)">0477 020 692</a></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-allied -->
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-emergency">
+      ⚠️ <strong>Emergency?</strong> Call <strong>000</strong> immediately. &nbsp;|&nbsp;
+      After-hours: <strong>13 HEALTH (13 43 25 84)</strong> &nbsp;|&nbsp;
+      Beaudesert Hospital ED: Tina Street, Beaudesert.
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+        <p>Serving our community for over 50 years with comprehensive, compassionate family healthcare for Beaudesert and the Scenic Rim.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/beaudesertmedicalcentre" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">General Consultations</a></li>
+          <li><a href="services.html">Chronic Disease</a></li>
+          <li><a href="services.html">Women's Health</a></li>
+          <li><a href="services.html">Skin &amp; Skin Cancer</a></li>
+          <li><a href="services.html">Mental Health</a></li>
+          <li><a href="services.html">Paediatrics</a></li>
+          <li><a href="services.html">Minor Surgery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Team</h4>
+        <ul class="footer-links">
+          <li><a href="team.html">Dr Michael Rice</a></li>
+          <li><a href="team.html">Dr Tom Mulcahy</a></li>
+          <li><a href="team.html">Dr Jaime Hurley</a></li>
+          <li><a href="team.html">Dr Imran Ali</a></li>
+          <li><a href="team.html">Dr Dilshaayee Prabaharan</a></li>
+          <li><a href="team.html">Dr Navin Raveendran</a></li>
+          <li><a href="team.html">Mara &amp; Annette (Nurses)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="https://automedsystems.com.au/" target="_blank" rel="noopener">Book Online</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Work With Us</a></li>
+          <li><a href="contact.html">Getting Here</a></li>
+          <li><a href="tel:0755411422">(07) 5541 1422</a></li>
+          <li><a href="mailto:reception@beaumed.com.au">reception@beaumed.com.au</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Beaudesert Medical Centre. All rights reserved.</p>
+      <p>This website is for general information only and does not constitute medical advice. In an emergency, call 000.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Dynamic team loading ──────────────────────────────────────
+(async function loadTeam() {
+  try {
+    const r    = await fetch('/api/team');
+    const data = await r.json();
+    renderProfiles('doctors-grid', data.doctors || [], 'doctor');
+    renderProfiles('nurses-grid',  data.nurses  || [], 'nurse');
+    renderAllied('allied-grid',    data.allied  || []);
+  } catch(e) {
+    console.error('Team load failed', e);
+  }
+})();
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderProfiles(gridId, members, type) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  const active = members.filter(m => m.active !== false);
+  if (!active.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = active.map(m => {
+    const fallback = type === 'nurse' ? '👩‍⚕️' : '👨‍⚕️';
+    const photoHtml = m.photo
+      ? `<img src="${esc(m.photo)}" alt="${esc(m.name)}" class="profile-photo" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+         <div class="photo-placeholder">${fallback}</div>`
+      : `<div class="photo-placeholder" style="display:flex">${fallback}</div>`;
+    const tagsHtml = (m.tags||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    return `
+      <div class="profile-card fade-up">
+        ${photoHtml}
+        <div class="profile-body">
+          <h3 class="profile-name">${esc(m.name)}</h3>
+          <div class="profile-creds">${esc(m.credentials)}</div>
+          ${tagsHtml ? `<div class="profile-tags">${tagsHtml}</div>` : ''}
+          <p class="profile-bio">${esc(m.bio)}</p>
+        </div>
+      </div>`;
+  }).join('');
+  grid.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+}
+
+function renderAllied(gridId, members) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  const active = members.filter(m => m.active !== false);
+  if (!active.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = active.map(m => {
+    const phoneHtml = m.phone
+      ? `<div class="allied-phone">📞 ${esc(m.phone)}</div>` : '';
+    return `
+      <div class="allied-card fade-up">
+        <div class="allied-card-icon">${m.icon || '🏥'}</div>
+        <h3>${esc(m.name)}</h3>
+        <div class="allied-name">${esc(m.credentials)}</div>
+        <p>${esc(m.bio)}</p>
+        ${phoneHtml}
+      </div>`;
+  }).join('');
+  grid.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+}
+</script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beaudesert Medical Centre — comprehensive, compassionate family GP care for Beaudesert and the Scenic Rim. Book online today.">
+  <title>Beaudesert Medical Centre | Your Family GP in Beaudesert QLD</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+      </a>
+      <div class="nav-top-actions">
+        <a href="tel:0755411422" class="nav-phone">📞 (07) 5541 1422</a>
+        <!-- UPDATE: Replace href with your AutoMed booking URL -->
+        <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="nav-book">📅 Book Online</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="fees.html">Fees</a></li>
+        <li><a href="careers.html">Work With Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="team.html" onclick="closeMenu()">Our Team</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="fees.html" onclick="closeMenu()">Fees</a>
+  <a href="careers.html" onclick="closeMenu()">Work With Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="m-book">📅 Book Online</a>
+</div>
+
+
+<!-- HERO -->
+<section id="home">
+  <div id="hero">
+    <div class="hero-dots"></div>
+    <div class="container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-badge">Serving Our Community for Over 50 Years</div>
+          <h1 class="hero-title">
+            Our patients are at the <span>centre of everything we do.</span>
+          </h1>
+          <p class="hero-sub">
+            Beaudesert Medical Centre aims to provide a traditional family general practitioner service that is comprehensive.
+            Our doctors and nurses will take the time to get to know you as a person —
+            <em style="color:rgba(255,255,255,.85); font-style:normal">not a number or a disease.</em>
+          </p>
+          <div class="hero-actions">
+            <!-- UPDATE: Replace href with your AutoMed booking URL -->
+            <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="btn btn-primary btn-lg">📅 Book Online</a>
+            <a href="tel:0755411422" class="btn btn-outline btn-lg">📞 (07) 5541 1422</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">70+</div>
+              <div class="stat-label">Years serving Beaudesert</div>
+            </div>
+            <div>
+              <div class="stat-num">6</div>
+              <div class="stat-label">Experienced GPs</div>
+            </div>
+            <div>
+              <div class="stat-num" style="font-size:1.25rem;line-height:1.2">RACGP &amp; ACRRM</div>
+              <div class="stat-label">Dual accredited teaching practice</div>
+            </div>
+            <div>
+              <div class="stat-num">24/7</div>
+              <div class="stat-label">Online booking via AutoMed</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-building">
+          <img src="practice.jpg" alt="Beaudesert Medical Centre — 47 William Street, Beaudesert QLD">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- QUICK INFO BAR -->
+<div class="info-bar">
+  <div class="container">
+    <div class="info-bar-inner">
+      <div class="info-chip">
+        <div class="info-chip-icon">📍</div>
+        <div class="info-chip-text">
+          <div class="info-label">Location</div>
+          <div class="info-value">47 William St, Beaudesert</div>
+          <div class="info-sub">QLD 4285</div>
+        </div>
+      </div>
+      <div class="info-chip">
+        <div class="info-chip-icon">📞</div>
+        <div class="info-chip-text">
+          <div class="info-label">Phone</div>
+          <div class="info-value"><a href="tel:0755411422" style="color:var(--navy)">(07) 5541 1422</a></div>
+          <div class="info-sub">Fax: (07) 5541 3677</div>
+        </div>
+      </div>
+      <!-- UPDATE: Verify opening hours before publishing -->
+      <div class="info-chip">
+        <div class="info-chip-icon">🕐</div>
+        <div class="info-chip-text">
+          <div class="info-label">Opening Hours</div>
+          <div class="info-value">Mon–Fri: 8:00am – 5:00pm</div>
+          <div class="info-sub">Wed to 6:00pm &nbsp;·&nbsp; Sat: 8:00am – 11:00am</div>
+        </div>
+      </div>
+      <div class="info-chip">
+        <div class="info-chip-icon">✉️</div>
+        <div class="info-chip-text">
+          <div class="info-label">Email</div>
+          <div class="info-value">reception@beaumed.com.au</div>
+          <div class="info-sub">We respond within 24 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SERVICES TEASER -->
+<section class="section services-section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="eyebrow">What We Offer</span>
+      <h2>Comprehensive GP Services</h2>
+      <p>From routine check-ups to complex chronic disease management, our experienced team provides the full spectrum of family healthcare close to home.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="svc-icon">🩺</div>
+        <h3>General Consultations</h3>
+        <p>Routine check-ups, acute illness, prescriptions, referrals and preventive care for the whole family.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">💊</div>
+        <h3>Chronic Disease Management</h3>
+        <p>Personalised care plans for diabetes, heart disease, asthma, COPD and other long-term conditions.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">👶</div>
+        <h3>Women's Health &amp; Maternity</h3>
+        <p>Antenatal care, postnatal support, contraception, cervical screening and women's health checks.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">🧠</div>
+        <h3>Mental Health</h3>
+        <p>Mental health care plans, GP-delivered support and coordinated referrals to psychologists.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">☀️</div>
+        <h3>Skin &amp; Skin Cancer</h3>
+        <p>Full skin checks, mole assessment, excisions and ongoing skin cancer management.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="svc-icon">🏥</div>
+        <h3>Hospital &amp; Home Visits</h3>
+        <p>Beaudesert Hospital attendance and home visits for patients who cannot attend the clinic.</p>
+      </div>
+    </div>
+    <div class="services-cta fade-up">
+      <a href="services.html" class="btn btn-navy">View All Services →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- MISSION STATEMENT -->
+<section class="mission-section">
+  <div class="container">
+    <p class="mission-text fade-up">
+      "70+ years dedicated to Beaudesert and rural Queensland —
+      <span>woven into the community we proudly call home.</span>"
+    </p>
+    <div class="mission-rule fade-up"></div>
+  </div>
+</section>
+
+
+<!-- BOOK ONLINE -->
+<section class="section book-section">
+  <div class="container">
+    <div class="book-inner">
+      <div class="book-text fade-up">
+        <span class="eyebrow">Online Appointments</span>
+        <h2>Book Your Appointment Anytime</h2>
+        <p>
+          We use <strong>AutoMed</strong> — a secure, Australian-built booking system
+          that connects directly to our appointment book in real time.
+          No third-party account required, no data harvesting.
+          Complete control stays with the practice and with you.
+        </p>
+        <div class="book-features">
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Choose your preferred doctor</div>
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Select your appointment type</div>
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Pick a time that suits you</div>
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Instant confirmation — no waiting</div>
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Available 24/7, even after hours</div>
+          <div class="book-feat"><div class="book-feat-tick">✓</div> Manage or cancel bookings easily</div>
+        </div>
+      </div>
+      <div class="book-card fade-up">
+        <div class="book-card-emoji">📅</div>
+        <h3>Book an Appointment</h3>
+        <p>Use our online booking portal to find an available time, or call reception during business hours.</p>
+        <!-- UPDATE: Replace href with your AutoMed booking URL -->
+        <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+          Book Online Now
+        </a>
+        <p class="automed-note">🔒 Powered by AutoMed Systems — secure &amp; Australian-built</p>
+        <div class="or-divider">or call us</div>
+        <a href="tel:0755411422" class="call-link">
+          <span>📞</span>(07) 5541 1422
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT CTA BAND -->
+<section class="section-sm contact-band">
+  <div class="container">
+    <div class="contact-band-inner">
+      <div>
+        <h3>Find Us in Central Beaudesert</h3>
+        <p>47 William Street, Beaudesert QLD 4285 — ample parking, easy access.</p>
+      </div>
+      <a href="contact.html" class="btn btn-primary">Get Directions &amp; Hours →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FACEBOOK LINK -->
+<section class="section-sm" style="background:var(--light)">
+  <div class="container">
+    <div class="section-header fade-up" style="margin-bottom:2rem">
+      <span class="eyebrow">Stay Connected</span>
+      <h2 style="color:var(--navy)">Follow Us on Facebook</h2>
+      <p style="color:var(--grey)">Keep up with news, health tips and updates from the BMC team.</p>
+    </div>
+    <div style="display:flex; justify-content:center" class="fade-up">
+      <a href="https://www.facebook.com/beaudesertmedicalcentre" target="_blank" rel="noopener" class="btn btn-navy btn-lg">
+        <span style="font-size:1.1rem">f</span> Visit us on Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-emergency">
+      ⚠️ <strong>Emergency?</strong> Call <strong>000</strong> immediately. &nbsp;|&nbsp;
+      After-hours: <strong>13 HEALTH (13 43 25 84)</strong> &nbsp;|&nbsp;
+      Beaudesert Hospital ED: Tina Street, Beaudesert.
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+        <p>Serving our community for over 50 years with comprehensive, compassionate family healthcare for Beaudesert and the Scenic Rim.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/beaudesertmedicalcentre" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">General Consultations</a></li>
+          <li><a href="services.html">Chronic Disease</a></li>
+          <li><a href="services.html">Women's Health</a></li>
+          <li><a href="services.html">Skin &amp; Skin Cancer</a></li>
+          <li><a href="services.html">Mental Health</a></li>
+          <li><a href="services.html">Paediatrics</a></li>
+          <li><a href="services.html">Minor Surgery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Team</h4>
+        <ul class="footer-links">
+          <li><a href="team.html">Dr Michael Rice</a></li>
+          <li><a href="team.html">Dr Tom Mulcahy</a></li>
+          <li><a href="team.html">Dr Jaime Hurley</a></li>
+          <li><a href="team.html">Dr Imran Ali</a></li>
+          <li><a href="team.html">Dr Dilshaayee Prabaharan</a></li>
+          <li><a href="team.html">Dr Navin Raveendran</a></li>
+          <li><a href="team.html">Mara &amp; Annette (Nurses)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="https://automedsystems.com.au/" target="_blank" rel="noopener">Book Online</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Work With Us</a></li>
+          <li><a href="contact.html">Getting Here</a></li>
+          <li><a href="tel:0755411422">(07) 5541 1422</a></li>
+          <li><a href="mailto:reception@beaumed.com.au">reception@beaumed.com.au</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Beaudesert Medical Centre. All rights reserved.</p>
+      <p>This website is for general information only and does not constitute medical advice. In an emergency, call 000.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

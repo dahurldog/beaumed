@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Blue background -->
+  <rect width="100" height="100" fill="#1C3468"/>
+
+  <!-- Palm tree — crown centred at (50, 36) -->
+  <g transform="translate(50,36)">
+
+    <!-- Trunk: slight taper, curves gently -->
+    <path d="M-3.5 12 C-4.5 26 -5 40 -4.5 47 L4.5 47 C5 40 4.5 26 3.5 12Z" fill="white"/>
+
+    <!-- 9 fronds rotating around crown centre -->
+    <!-- Each frond: teardrop, wider mid-leaf, pointed tip -->
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(-120)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(-90)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(-60)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(-30)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(0)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(30)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(60)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(90)"/>
+    <path d="M0 0 C-4.5 -5 -4 -17 0 -26 C4 -17 4.5 -5 0 0Z" fill="white" transform="rotate(120)"/>
+
+  </g>
+
+  <!-- Two white base lines -->
+  <rect x="14" y="85" width="72" height="7" rx="3.5" fill="white"/>
+  <rect x="22" y="94" width="56" height="5" rx="2.5" fill="white"/>
+</svg>

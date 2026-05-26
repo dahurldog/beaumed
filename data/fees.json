@@ -1,0 +1,21 @@
+{
+  "lastUpdated": "2025-05-26",
+  "bulkBilledItems": [
+    "Children's scheduled immunisations",
+    "WorkCover appointments",
+    "Veteran's Affairs (DVA) appointments",
+    "Most GP Management Plans (GPMP)",
+    "Team Care Arrangements (TCA)",
+    "Mental Health Treatment Plans",
+    "3–4 monthly chronic disease checkups (for eligible patients on plans)",
+    "Over-75 health checks",
+    "ATSI health checks and chronic disease management"
+  ],
+  "standardFees": [
+    { "name": "Brief consultation (Level A)", "amount": "" },
+    { "name": "Standard consultation (Level B)", "amount": "" },
+    { "name": "Long consultation (Level C)", "amount": "" },
+    { "name": "Prolonged consultation (Level D)", "amount": "" }
+  ],
+  "notice": ""
+}

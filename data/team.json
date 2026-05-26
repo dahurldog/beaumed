@@ -1,0 +1,164 @@
+{
+  "doctors": [
+    {
+      "id": "dr-michael-rice",
+      "name": "Dr Michael Rice",
+      "credentials": "MB BS · DRANZCOG · FRACGP · FACRRM",
+      "tags": [
+        "Rural Medicine",
+        "Skin Cancer",
+        "Obstetrics"
+      ],
+      "bio": "A specialist in general practice and rural medicine with advanced training in skin and skin cancer and the care of mothers and babies. At BMC since the early 1990s, Dr Rice is a clinical teacher for UQ and Griffith and a Foundation member of RDAQ.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2017/03/Head_MichaelRice.jpg",
+      "active": true
+    },
+    {
+      "id": "dr-tom-mulcahy",
+      "name": "Dr Tom Mulcahy",
+      "credentials": "MB BS · FRACGP · DipRACOG · DCH",
+      "tags": [
+        "Maternity Care",
+        "Minor Surgery",
+        "Aged Care"
+      ],
+      "bio": "A Beaudesert local and University of Queensland graduate (1985), Tom joined BMC in 1997 following post-graduate training in South Africa and the UK. He has broad interests in maternity, acute care, preventive health and aged care.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2017/03/Head_ToniMulcahy.jpg",
+      "active": true
+    },
+    {
+      "id": "dr-jaime-hurley",
+      "name": "Dr Jaime Hurley",
+      "credentials": "MB BS · DRANZCOG (Adv) · FRACGP · FACRRM · FARGP",
+      "tags": [
+        "Rural Generalist",
+        "Advanced Obstetrics",
+        "Postnatal Care"
+      ],
+      "bio": "A specialist in general practice and a rural generalist with advanced skills in obstetrics, Jaime is passionate about ensuring rural communities have access to exceptional maternity and postnatal care.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2017/03/Head_JamieHurley.jpg",
+      "active": true
+    },
+    {
+      "id": "dr-imran-ali",
+      "name": "Dr Imran Ali",
+      "credentials": "Rural General Practitioner",
+      "tags": [
+        "Rural GP",
+        "Preventive Cardiology",
+        "Community Health"
+      ],
+      "bio": "Relocating from Kingaroy, Dr Ali brings a keen passion for rural general practice and community connection. He has a particular interest in preventive cardiology and Healthy Heart checks.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2017/03/Dr-Imran-Ali.png",
+      "active": true
+    },
+    {
+      "id": "dr-dilshaayee-prabaharan",
+      "name": "Dr Dilshaayee Prabaharan",
+      "credentials": "Rural Generalist",
+      "tags": [
+        "Rural Generalist",
+        "Paediatrics",
+        "Women's Health"
+      ],
+      "bio": "Born and raised in Toronto, Canada, Dilshaayee completed a graduate diploma in Sydney Child Health. She brings a warm, thorough approach with special interests in paediatrics and women's health.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2024/04/Dilshaayee-Prabaharan.jpg",
+      "active": true
+    },
+    {
+      "id": "dr-navin-raveendran",
+      "name": "Dr Navin Raveendran",
+      "credentials": "Rural Generalist",
+      "tags": [
+        "Rural Generalist",
+        "Advanced Obstetrics",
+        "Hospital Care"
+      ],
+      "bio": "Relocating from Mackay with specialist training completed in Melbourne, Dr Navin works across BMC and Beaudesert Hospital, bringing advanced obstetrics and broad rural generalist skills to the team.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2024/04/Navin-Raveendran.jpg",
+      "active": true
+    },
+    {
+      "id": "dr-addison-hurley",
+      "name": "Dr Addison Hurley",
+      "credentials": "MBBS · FRACGP · FACRRM · FARGP · DRANZCOG (Adv)",
+      "tags": [
+        "Child Health",
+        "Animal Welfare"
+      ],
+      "bio": "She loves horses and playing vet",
+      "photo": "/uploads/team/1779788152960-593687905.png",
+      "active": true
+    }
+  ],
+  "nurses": [
+    {
+      "id": "mara",
+      "name": "Mara",
+      "credentials": "Registered Nurse",
+      "tags": [],
+      "bio": "Bio and photo coming soon.",
+      "photo": "",
+      "active": true
+    },
+    {
+      "id": "annette",
+      "name": "Annette",
+      "credentials": "EN — Enrolled Nurse",
+      "tags": [
+        "Aged Care",
+        "Complex Care",
+        "Diagnostics"
+      ],
+      "bio": "An experienced enrolled nurse with skills spanning children through to aged care. Annette assists with procedures, manages dressings and coordinates complex care with warmth and professionalism.",
+      "photo": "http://beaumed.com.au/wp-content/uploads/2017/05/headshot_alison.png",
+      "active": true
+    }
+  ],
+  "allied": [
+    {
+      "id": "podiatry",
+      "name": "Beaudesert Podiatry Clinic",
+      "credentials": "Myra Wang — Podiatrist",
+      "tags": [
+        "Podiatry",
+        "Diabetic Foot",
+        "Orthotics"
+      ],
+      "bio": "Onsite podiatry services covering general foot care, diabetic foot assessments, nail conditions, orthotics and more. Patients on Chronic Disease Management Plans may access funded visits. Bulk-billing may be available or a gap fee may apply.",
+      "phone": "Book via BMC: (07) 5541 1422",
+      "photo": "",
+      "icon": "🦶",
+      "active": true
+    },
+    {
+      "id": "audiology",
+      "name": "Hearing Tests & Hearing Aids",
+      "credentials": "Audioclinic — National Provider",
+      "tags": [
+        "Audiology",
+        "Hearing Aids"
+      ],
+      "bio": "Audioclinic visits BMC for hearing tests and assistance with hearing aids. If you have concerns about your hearing, speak with your GP or contact Audioclinic directly.",
+      "phone": "(07) 5502 3800 or book online at audioclinic.com.au",
+      "photo": "",
+      "icon": "👂",
+      "active": true
+    },
+    {
+      "id": "counselling",
+      "name": "Psychology & Counselling",
+      "credentials": "Lyndall Ferguson — Counsellor",
+      "tags": [
+        "Counselling",
+        "Mental Health",
+        "Family"
+      ],
+      "bio": "Marriage, family and personal counselling including contracted Employee Assistance Programs. Areas of support include anxiety, depression, grief and loss, parenting and stress.",
+      "phone": "(07) 5541 1422 or speak to BMC reception",
+      "photo": "",
+      "icon": "💬",
+      "active": true
+    }
+  ]
+}

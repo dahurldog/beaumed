@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMC Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ── Auth screen ────────────────────────────────────────── -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <img src="../favicon.png" alt="BMC" onerror="this.style.display='none'">
+    </div>
+    <h1 id="authTitle">Admin Login</h1>
+    <p class="sub" id="authSub">Beaudesert Medical Centre</p>
+    <div class="error-msg" id="authError"></div>
+
+    <!-- Setup form (first run) -->
+    <div id="setupForm" style="display:none">
+      <div class="form-group">
+        <label>Create Admin Password</label>
+        <input type="password" id="setupPw" placeholder="At least 8 characters" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="setupPw2" placeholder="Repeat password" autocomplete="new-password">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doSetup()">Create Password &amp; Sign In</button>
+    </div>
+
+    <!-- Login form -->
+    <div id="loginForm">
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPw" placeholder="Enter admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="doLogin()">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── App ───────────────────────────────────────────────── -->
+<div class="app" id="app">
+
+  <header class="app-header">
+    <div class="header-logo">BMC <span>Admin</span></div>
+    <nav class="header-nav">
+      <button class="nav-tab active" data-tab="fees">Fees</button>
+      <button class="nav-tab" data-tab="team">Team</button>
+      <button class="nav-tab" data-tab="settings">Settings</button>
+    </nav>
+    <button class="logout-btn" onclick="doLogout()">Sign out</button>
+  </header>
+
+  <main class="app-body">
+
+    <!-- ── FEES TAB ─────────────────────────────────────── -->
+    <div class="tab-content active" id="tab-fees">
+      <div class="page-title">Fee Schedule</div>
+      <p class="page-sub">Changes are saved instantly and appear live on the website.</p>
+
+      <!-- Standard fees -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Standard Consultation Fees</h3>
+        </div>
+        <div class="card-body">
+          <div id="standardFeeList"></div>
+          <div class="add-row" id="addStdRow">
+            <input type="text" id="newStdName" placeholder="Fee description">
+            <input type="text" id="newStdAmt" placeholder="Amount (e.g. $75.00)" class="amount-in">
+            <button class="btn btn-primary btn-sm" onclick="addStdFee()">+ Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bulk-billed items -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Bulk-Billed Services</h3>
+        </div>
+        <div class="card-body">
+          <div id="bulkBillList"></div>
+          <div class="add-row" id="addBulkRow">
+            <input type="text" id="newBulkItem" placeholder="Add bulk-billed item…" style="flex:1">
+            <button class="btn btn-primary btn-sm" onclick="addBulkItem()">+ Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notice -->
+      <div class="card">
+        <div class="card-header"><h3>Notice / Special Message</h3></div>
+        <div class="card-body">
+          <div class="form-group" style="margin:0">
+            <textarea id="feeNotice" placeholder="Optional message shown on the fees page (leave blank to hide)…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <span class="save-note" id="feesSaveNote">No unsaved changes.</span>
+        <button class="btn btn-primary" onclick="saveFees()">Save Fees</button>
+      </div>
+    </div>
+
+    <!-- ── TEAM TAB ──────────────────────────────────────── -->
+    <div class="tab-content" id="tab-team">
+      <div class="page-title">Team Members</div>
+      <p class="page-sub">Add, edit or remove doctors, nurses and allied health providers.</p>
+
+      <div class="section-label">
+        Doctors
+        <button class="btn btn-primary btn-sm" onclick="openMember('doctor')">+ Add Doctor</button>
+      </div>
+      <div class="team-grid" id="doctorGrid"></div>
+
+      <div class="section-label" style="margin-top:2rem">
+        Nurses
+        <button class="btn btn-primary btn-sm" onclick="openMember('nurse')">+ Add Nurse</button>
+      </div>
+      <div class="team-grid" id="nurseGrid"></div>
+
+      <div class="section-label" style="margin-top:2rem">
+        Allied Health
+        <button class="btn btn-primary btn-sm" onclick="openMember('allied')">+ Add Allied Health</button>
+      </div>
+      <div class="team-grid" id="alliedGrid"></div>
+    </div>
+
+    <!-- ── SETTINGS TAB ──────────────────────────────────── -->
+    <div class="tab-content" id="tab-settings">
+      <div class="page-title">Settings</div>
+      <p class="page-sub">Manage your admin account.</p>
+      <div class="settings-wrap">
+        <div class="card">
+          <div class="card-header"><h3>Change Password</h3></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Current Password</label>
+              <input type="password" id="pwCurrent" autocomplete="current-password">
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="pwNew" autocomplete="new-password">
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="pwNew2" autocomplete="new-password">
+            </div>
+            <div class="error-msg" id="pwError" style="text-align:left"></div>
+            <button class="btn btn-primary" onclick="changePassword()">Update Password</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── Team member modal ─────────────────────────────────── -->
+<div class="overlay" id="memberOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">Add Team Member</h2>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="memberId">
+      <input type="hidden" id="memberSection">
+      <input type="hidden" id="memberIndex" value="-1">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="mName" placeholder="Dr Jane Smith">
+      </div>
+      <div class="form-group">
+        <label>Credentials</label>
+        <!-- GP Registrar toggle -->
+        <div style="margin-bottom:.6rem">
+          <div class="cred-chip registrar-chip" id="credRegistrar" onclick="this.classList.toggle('selected')">
+            🩺 GP Registrar
+          </div>
+        </div>
+        <div class="cred-picker" id="credPicker">
+          <span class="cred-section-label">Degrees &amp; Fellowships</span>
+          <div class="cred-chip" data-cred="MBBS"       onclick="this.classList.toggle('selected')">MBBS</div>
+          <div class="cred-chip" data-cred="FRACGP"     onclick="this.classList.toggle('selected')">FRACGP</div>
+          <div class="cred-chip" data-cred="FACRRM"     onclick="this.classList.toggle('selected')">FACRRM</div>
+          <div class="cred-chip" data-cred="FRACGP-RG"  onclick="this.classList.toggle('selected')">FRACGP-RG</div>
+          <div class="cred-chip" data-cred="FARGP"      onclick="this.classList.toggle('selected')">FARGP</div>
+          <span class="cred-section-label">Additional Qualifications</span>
+          <div class="cred-chip" data-cred="DRANZCOG"       onclick="this.classList.toggle('selected')">DRANZCOG</div>
+          <div class="cred-chip" data-cred="DRANZCOG (Adv)" onclick="this.classList.toggle('selected')">DRANZCOG (Adv)</div>
+          <div class="cred-chip" data-cred="DRGA"            onclick="this.classList.toggle('selected')">DRGA</div>
+          <div class="cred-chip" data-cred="DCH"             onclick="this.classList.toggle('selected')">DCH</div>
+          <div class="cred-chip" data-cred="DipRACOG"        onclick="this.classList.toggle('selected')">DipRACOG</div>
+          <div class="cred-chip" id="credOtherChip"          onclick="toggleOtherChip()">Other…</div>
+        </div>
+        <div id="otherFieldWrap" style="margin-top:.65rem;display:none">
+          <input type="text" id="mCredOther" placeholder="e.g. Rural Generalist, Rural GP…"
+            oninput="document.getElementById('credOtherChip').classList.toggle('selected', this.value.trim().length > 0)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Bio</label>
+        <textarea id="mBio" placeholder="Short biography…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Speciality Tags</label>
+        <div class="tag-wrap" id="tagWrap">
+          <input class="tag-input" id="tagInput" placeholder="Type and press Enter…" onkeydown="tagKeydown(event)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Photo</label>
+        <div class="photo-upload" id="photoUploadZone">
+          <input type="file" id="photoFile" accept="image/*" onchange="handlePhotoFile(event)">
+          <img id="photoPreview" class="photo-preview-img" src="" alt="" style="display:none">
+          <p id="photoUploadLabel">Click or drag a photo here (JPG / PNG, max 8 MB)</p>
+        </div>
+        <div class="url-or">— or paste a URL —</div>
+        <div class="form-group" style="margin:0">
+          <input type="text" id="mPhotoUrl" placeholder="https://…" oninput="syncPhotoUrl()">
+        </div>
+      </div>
+      <div id="iconRow" class="form-group" style="display:none">
+        <label>Icon (Allied Health)</label>
+        <input type="text" id="mIcon" placeholder="🦶  (emoji for card thumbnail)">
+      </div>
+      <div id="phoneRow" class="form-group" style="display:none">
+        <label>Phone / Booking Note</label>
+        <input type="text" id="mPhone" placeholder="(07) 5541 1422 or book via reception">
+      </div>
+      <div class="form-group" style="margin:0">
+        <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer">
+          <input type="checkbox" id="mActive" checked style="width:auto;margin:0"> Active (shown on website)
+        </label>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveMember()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ─────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// State
+// ─────────────────────────────────────────────────────────────
+let feesData   = { bulkBilledItems: [], standardFees: [], notice: '' };
+let teamData   = { doctors: [], nurses: [], allied: [] };
+let feesDirty  = false;
+let memberTags = [];
+
+// ─────────────────────────────────────────────────────────────
+// Bootstrap
+// ─────────────────────────────────────────────────────────────
+(async function init() {
+  const r = await api('GET', '/api/admin/status');
+  if (!r.ok) { showToast('Server error', 'err'); return; }
+  const { authenticated, setupComplete } = await r.json();
+
+  if (!setupComplete) {
+    document.getElementById('authTitle').textContent = 'Create Admin Password';
+    document.getElementById('authSub').textContent   = 'First-time setup';
+    document.getElementById('setupForm').style.display = '';
+    document.getElementById('loginForm').style.display  = 'none';
+    return;
+  }
+  if (!authenticated) return; // show login (default)
+  showApp();
+})();
+
+// ─────────────────────────────────────────────────────────────
+// Auth
+// ─────────────────────────────────────────────────────────────
+async function doSetup() {
+  const pw  = document.getElementById('setupPw').value;
+  const pw2 = document.getElementById('setupPw2').value;
+  if (pw !== pw2)   { setAuthErr('Passwords do not match.'); return; }
+  if (pw.length < 8){ setAuthErr('Password must be at least 8 characters.'); return; }
+  const r = await api('POST', '/api/admin/setup', { password: pw });
+  const d = await r.json();
+  if (!r.ok) { setAuthErr(d.error); return; }
+  showApp();
+}
+
+async function doLogin() {
+  const pw = document.getElementById('loginPw').value;
+  const r  = await api('POST', '/api/admin/login', { password: pw });
+  const d  = await r.json();
+  if (!r.ok) { setAuthErr(d.error || 'Login failed.'); return; }
+  showApp();
+}
+
+async function doLogout() {
+  await api('POST', '/api/admin/logout');
+  location.reload();
+}
+
+function setAuthErr(msg) {
+  document.getElementById('authError').textContent = msg;
+}
+
+// ─────────────────────────────────────────────────────────────
+// App shell
+// ─────────────────────────────────────────────────────────────
+async function showApp() {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  await Promise.all([loadFees(), loadTeam()]);
+
+  // Tab switching
+  document.querySelectorAll('.nav-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
+// Fees
+// ─────────────────────────────────────────────────────────────
+async function loadFees() {
+  const r = await api('GET', '/api/fees');
+  feesData = await r.json();
+  renderFees();
+}
+
+function renderFees() {
+  // Standard fees
+  const sl = document.getElementById('standardFeeList');
+  sl.innerHTML = '';
+  (feesData.standardFees || []).forEach((f, i) => {
+    sl.appendChild(feeRow(f.name, f.amount, i, 'std'));
+  });
+
+  // Bulk-billed
+  const bl = document.getElementById('bulkBillList');
+  bl.innerHTML = '';
+  (feesData.bulkBilledItems || []).forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'fee-item';
+    row.innerHTML = `
+      <input class="fee-item-name" value="${esc(item)}" oninput="setBulkItem(${i},this.value)" style="flex:1">
+      <button class="remove-btn" onclick="removeBulk(${i})" title="Remove">&#215;</button>`;
+    bl.appendChild(row);
+  });
+
+  document.getElementById('feeNotice').value = feesData.notice || '';
+  markFeeClean();
+}
+
+function feeRow(name, amount, idx, type) {
+  const row = document.createElement('div');
+  row.className = 'fee-item';
+  row.innerHTML = `
+    <input class="fee-item-name"   value="${esc(name)}"   placeholder="Description" oninput="setStdField(${idx},'name',this.value)">
+    <input class="fee-item-amount" value="${esc(amount)}" placeholder="Amount"      oninput="setStdField(${idx},'amount',this.value)">
+    <button class="remove-btn" onclick="removeStd(${idx})" title="Remove">&#215;</button>`;
+  return row;
+}
+
+function setStdField(i, field, val) {
+  feesData.standardFees[i][field] = val;
+  markFeeDirty();
+}
+function setBulkItem(i, val) {
+  feesData.bulkBilledItems[i] = val;
+  markFeeDirty();
+}
+function removeStd(i)  { feesData.standardFees.splice(i, 1);    renderFees(); markFeeDirty(); }
+function removeBulk(i) { feesData.bulkBilledItems.splice(i, 1); renderFees(); markFeeDirty(); }
+
+function addStdFee() {
+  const n = document.getElementById('newStdName').value.trim();
+  const a = document.getElementById('newStdAmt').value.trim();
+  if (!n) return;
+  feesData.standardFees.push({ name: n, amount: a });
+  document.getElementById('newStdName').value = '';
+  document.getElementById('newStdAmt').value  = '';
+  renderFees(); markFeeDirty();
+}
+function addBulkItem() {
+  const v = document.getElementById('newBulkItem').value.trim();
+  if (!v) return;
+  feesData.bulkBilledItems.push(v);
+  document.getElementById('newBulkItem').value = '';
+  renderFees(); markFeeDirty();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('feeNotice').addEventListener('input', () => markFeeDirty());
+});
+
+function markFeeDirty() {
+  feesDirty = true;
+  const n = document.getElementById('feesSaveNote');
+  n.textContent = 'You have unsaved changes.';
+  n.classList.add('dirty');
+}
+function markFeeClean() {
+  feesDirty = false;
+  const n = document.getElementById('feesSaveNote');
+  n.textContent = 'No unsaved changes.';
+  n.classList.remove('dirty');
+}
+
+async function saveFees() {
+  feesData.notice = document.getElementById('feeNotice').value;
+  const r = await api('PUT', '/api/admin/fees', feesData);
+  if (r.ok) { showToast('Fees saved ✓', 'ok'); markFeeClean(); }
+  else       { showToast('Save failed', 'err'); }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Team
+// ─────────────────────────────────────────────────────────────
+async function loadTeam() {
+  const r = await api('GET', '/api/team');
+  teamData = await r.json();
+  renderTeam();
+}
+
+function renderTeam() {
+  renderSection('doctorGrid',  teamData.doctors || [],  'doctor');
+  renderSection('nurseGrid',   teamData.nurses  || [],  'nurse');
+  renderSection('alliedGrid',  teamData.allied  || [],  'allied');
+}
+
+function renderSection(gridId, members, section) {
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = '';
+  members.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'team-card';
+    const thumb = m.photo
+      ? `<div class="team-thumb"><img src="${esc(m.photo)}" alt="" onerror="this.parentElement.innerHTML='${esc(m.icon||'👤')}'"></div>`
+      : `<div class="team-thumb">${m.icon || '👤'}</div>`;
+    card.innerHTML = `
+      ${thumb}
+      <div class="team-info">
+        <div class="team-name">${esc(m.name)}${!m.active ? '<span class="inactive-badge">Inactive</span>' : ''}</div>
+        <div class="team-creds">${esc(m.credentials)}</div>
+        <div class="team-actions">
+          <button class="btn btn-outline btn-sm" onclick="openMember('${section}',${i})">Edit</button>
+          <button class="btn btn-danger  btn-sm" onclick="removeMember('${section}',${i})">Remove</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────
+// Member modal
+// ─────────────────────────────────────────────────────────────
+function openMember(section, idx) {
+  const isEdit = idx !== undefined;
+  const m = isEdit ? teamData[sectionKey(section)][idx] : {};
+
+  document.getElementById('modalTitle').textContent = isEdit ? 'Edit Team Member' : 'Add Team Member';
+  document.getElementById('memberSection').value    = section;
+  document.getElementById('memberIndex').value      = isEdit ? idx : -1;
+  document.getElementById('memberId').value         = m.id || '';
+  document.getElementById('mName').value            = m.name || '';
+  loadCredPicker(m.credentials || '');
+  document.getElementById('mBio').value             = m.bio || '';
+  document.getElementById('mPhotoUrl').value        = m.photo || '';
+  document.getElementById('mActive').checked        = m.active !== false;
+  document.getElementById('mIcon').value            = m.icon || '';
+  document.getElementById('mPhone').value           = m.phone || '';
+
+  // Allied extras
+  const isAllied = section === 'allied';
+  document.getElementById('iconRow').style.display  = isAllied ? '' : 'none';
+  document.getElementById('phoneRow').style.display = isAllied ? '' : 'none';
+
+  // Photo preview
+  const prev = document.getElementById('photoPreview');
+  const lbl  = document.getElementById('photoUploadLabel');
+  if (m.photo) {
+    prev.src = m.photo; prev.style.display = 'block';
+    lbl.textContent = 'Click to replace photo';
+  } else {
+    prev.style.display = 'none';
+    lbl.textContent = 'Click or drag a photo here (JPG / PNG, max 8 MB)';
+  }
+
+  // Tags
+  memberTags = [...(m.tags || [])];
+  renderTags();
+
+  document.getElementById('memberOverlay').classList.add('open');
+  document.getElementById('mName').focus();
+}
+
+function closeModal() {
+  document.getElementById('memberOverlay').classList.remove('open');
+}
+
+async function saveMember() {
+  const section = document.getElementById('memberSection').value;
+  const idx     = parseInt(document.getElementById('memberIndex').value);
+  const name    = document.getElementById('mName').value.trim();
+  if (!name) { showToast('Name is required', 'err'); return; }
+
+  const m = {
+    id:          document.getElementById('memberId').value || slugify(name),
+    name,
+    credentials: buildCredentials(),
+    tags:        [...memberTags],
+    bio:         document.getElementById('mBio').value.trim(),
+    photo:       document.getElementById('mPhotoUrl').value.trim(),
+    active:      document.getElementById('mActive').checked,
+  };
+  if (document.getElementById('mIcon').value)  m.icon  = document.getElementById('mIcon').value.trim();
+  if (document.getElementById('mPhone').value) m.phone = document.getElementById('mPhone').value.trim();
+
+  const key = sectionKey(section);
+  if (idx >= 0) teamData[key][idx] = m;
+  else          teamData[key].push(m);
+
+  const r = await api('PUT', '/api/admin/team', teamData);
+  if (r.ok) {
+    showToast('Saved ✓', 'ok');
+    closeModal();
+    renderTeam();
+  } else {
+    showToast('Save failed', 'err');
+  }
+}
+
+async function removeMember(section, idx) {
+  if (!confirm('Remove this team member?')) return;
+  teamData[sectionKey(section)].splice(idx, 1);
+  const r = await api('PUT', '/api/admin/team', teamData);
+  if (r.ok) { showToast('Removed', 'ok'); renderTeam(); }
+  else       { showToast('Error removing', 'err'); }
+}
+
+function sectionKey(s) {
+  return s === 'doctor' ? 'doctors' : s === 'nurse' ? 'nurses' : 'allied';
+}
+
+// ─────────────────────────────────────────────────────────────
+// Credential picker
+// ─────────────────────────────────────────────────────────────
+const CRED_KNOWN = [
+  'MBBS','FRACGP','FACRRM','FRACGP-RG','FARGP',
+  'DRANZCOG','DRANZCOG (Adv)','DRGA','DCH','DipRACOG'
+];
+// Normalise legacy variants found in existing data
+const CRED_ALIAS = { 'MB BS': 'MBBS', 'MBBS': 'MBBS', 'DRANZCOG(Adv)': 'DRANZCOG (Adv)' };
+
+function toggleOtherChip() {
+  const chip = document.getElementById('credOtherChip');
+  const wrap = document.getElementById('otherFieldWrap');
+  const inp  = document.getElementById('mCredOther');
+  const open = wrap.style.display === 'none';
+  wrap.style.display = open ? '' : 'none';
+  chip.classList.toggle('selected', open);
+  if (open) { inp.focus(); }
+  else       { inp.value = ''; }
+}
+
+function loadCredPicker(credStr) {
+  // Clear all
+  document.querySelectorAll('#credPicker .cred-chip[data-cred]').forEach(c => c.classList.remove('selected'));
+  document.getElementById('credRegistrar').classList.remove('selected');
+  document.getElementById('mCredOther').value = '';
+  document.getElementById('otherFieldWrap').style.display = 'none';
+  document.getElementById('credOtherChip').classList.remove('selected');
+
+  if (!credStr) return;
+
+  const parts    = credStr.split(/\s*·\s*/).map(p => p.trim()).filter(Boolean);
+  const unknowns = [];
+
+  parts.forEach(p => {
+    if (p === 'GP Registrar') {
+      document.getElementById('credRegistrar').classList.add('selected');
+      return;
+    }
+    const mapped = CRED_ALIAS[p] || p;
+    const chip   = document.querySelector(`#credPicker .cred-chip[data-cred="${CSS.escape(mapped)}"]`);
+    if (chip) chip.classList.add('selected');
+    else      unknowns.push(p);
+  });
+
+  if (unknowns.length) {
+    document.getElementById('mCredOther').value         = unknowns.join(' · ');
+    document.getElementById('otherFieldWrap').style.display = '';
+    document.getElementById('credOtherChip').classList.add('selected');
+  }
+}
+
+function buildCredentials() {
+  const parts = [];
+  if (document.getElementById('credRegistrar').classList.contains('selected'))
+    parts.push('GP Registrar');
+  document.querySelectorAll('#credPicker .cred-chip[data-cred].selected').forEach(c =>
+    parts.push(c.dataset.cred)
+  );
+  const other = document.getElementById('mCredOther').value.trim();
+  if (other) parts.push(other);
+  return parts.join(' · ');
+}
+
+// ─────────────────────────────────────────────────────────────
+// Photo upload
+// ─────────────────────────────────────────────────────────────
+async function handlePhotoFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const fd = new FormData();
+  fd.append('photo', file);
+
+  showToast('Uploading…', 'ok');
+  const r = await fetch('/api/admin/upload-photo', { method: 'POST', body: fd });
+  const d = await r.json();
+  if (!r.ok) { showToast(d.error || 'Upload failed', 'err'); return; }
+
+  document.getElementById('mPhotoUrl').value = d.url;
+  const prev = document.getElementById('photoPreview');
+  prev.src = d.url; prev.style.display = 'block';
+  document.getElementById('photoUploadLabel').textContent = 'Click to replace photo';
+  showToast('Photo uploaded ✓', 'ok');
+}
+
+function syncPhotoUrl() {
+  const url  = document.getElementById('mPhotoUrl').value.trim();
+  const prev = document.getElementById('photoPreview');
+  const lbl  = document.getElementById('photoUploadLabel');
+  if (url) {
+    prev.src = url; prev.style.display = 'block';
+    lbl.textContent = 'Click to replace photo';
+  } else {
+    prev.style.display = 'none';
+    lbl.textContent = 'Click or drag a photo here (JPG / PNG, max 8 MB)';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// Tag input
+// ─────────────────────────────────────────────────────────────
+function tagKeydown(e) {
+  const input = e.target;
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = input.value.trim().replace(/,$/, '');
+    if (val && !memberTags.includes(val)) { memberTags.push(val); renderTags(); }
+    input.value = '';
+  } else if (e.key === 'Backspace' && !input.value && memberTags.length) {
+    memberTags.pop(); renderTags();
+  }
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tagWrap');
+  wrap.querySelectorAll('.tag-chip').forEach(c => c.remove());
+  const input = document.getElementById('tagInput');
+  memberTags.forEach((t, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.innerHTML = `${esc(t)}<button type="button" onclick="removeTag(${i})" title="Remove">×</button>`;
+    wrap.insertBefore(chip, input);
+  });
+}
+
+function removeTag(i) { memberTags.splice(i, 1); renderTags(); }
+
+// ─────────────────────────────────────────────────────────────
+// Change password
+// ─────────────────────────────────────────────────────────────
+async function changePassword() {
+  const cur  = document.getElementById('pwCurrent').value;
+  const nw   = document.getElementById('pwNew').value;
+  const nw2  = document.getElementById('pwNew2').value;
+  const err  = document.getElementById('pwError');
+  err.textContent = '';
+  if (nw !== nw2)   { err.textContent = 'New passwords do not match.'; return; }
+  if (nw.length < 8){ err.textContent = 'Password must be at least 8 characters.'; return; }
+  const r = await api('POST', '/api/admin/change-password', { current: cur, newPassword: nw });
+  const d = await r.json();
+  if (!r.ok) { err.textContent = d.error || 'Failed'; return; }
+  showToast('Password updated ✓', 'ok');
+  ['pwCurrent','pwNew','pwNew2'].forEach(id => document.getElementById(id).value = '');
+}
+
+// ─────────────────────────────────────────────────────────────
+// Utilities
+// ─────────────────────────────────────────────────────────────
+function api(method, url, body) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  return fetch(url, opts);
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = `toast ${type}`;
+  void t.offsetWidth;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+// Close modal on overlay click
+document.getElementById('memberOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Work with us at Beaudesert Medical Centre — a dynamic, supportive rural GP practice. Opportunities for GPs, nurses and admin staff.">
+  <title>Work With Us | Beaudesert Medical Centre</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+      </a>
+      <div class="nav-top-actions">
+        <a href="tel:0755411422" class="nav-phone">📞 (07) 5541 1422</a>
+        <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="nav-book">📅 Book Online</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="fees.html">Fees</a></li>
+        <li><a href="careers.html" class="active">Work With Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="team.html" onclick="closeMenu()">Our Team</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="fees.html" onclick="closeMenu()">Fees</a>
+  <a href="careers.html" onclick="closeMenu()">Work With Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="m-book">📅 Book Online</a>
+</div>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-eyebrow">Join Our Team</div>
+      <h1>Want to Work Here?</h1>
+      <p>A dynamic, supportive practice with a strong culture of education, collaboration and community. Make a real difference in rural Queensland.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- CAREERS CONTENT -->
+<section class="section" style="background: var(--light);">
+  <div class="container">
+    <div class="careers-inner">
+
+      <div class="careers-text fade-up">
+        <span class="eyebrow">Join Our Team</span>
+        <h2>Want to Work Here?</h2>
+        <p>Beaudesert Medical Centre is a dynamic, supportive practice with a strong culture of education, collaboration and community. We'd love to hear from motivated GPs, nurses and practice staff who want to make a real difference in rural Queensland.</p>
+        <div class="perks">
+          <div class="perk">
+            <div class="perk-icon">🌿</div>
+            <div>
+              <h4>Scenic Rim Lifestyle</h4>
+              <p>Beautiful rural Queensland with easy access to the Gold Coast and Brisbane.</p>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🎓</div>
+            <div>
+              <h4>Teaching &amp; Learning Culture</h4>
+              <p>An accredited teaching practice committed to professional development at every level.</p>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">👨‍⚕️</div>
+            <div>
+              <h4>Supportive, Collegial Team</h4>
+              <p>A close-knit team of experienced GPs and nurses who genuinely support each other.</p>
+            </div>
+          </div>
+          <div class="perk">
+            <div class="perk-icon">🏥</div>
+            <div>
+              <h4>Variety &amp; Challenge</h4>
+              <p>Rural generalist work with obstetrics, procedures and a genuinely diverse case mix.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="careers-form fade-up">
+        <h3>Express Your Interest</h3>
+        <p>Fill in the form below and our practice manager will be in touch about current or upcoming opportunities.</p>
+        <!--
+          UPDATE: Replace with a proper form handler.
+          Option 1 — Formspree (free): action="https://formspree.io/f/YOUR_FORM_ID"
+          Option 2 — keep mailto for simplicity (opens email client)
+        -->
+        <form action="mailto:reception@beaumed.com.au" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" name="firstname" placeholder="Jane" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" name="lastname" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" placeholder="jane@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="0400 000 000">
+          </div>
+          <div class="form-group">
+            <label>Role You're Interested In *</label>
+            <select name="role" required>
+              <option value="" disabled selected>Select a role…</option>
+              <option>General Practitioner (FRACGP / FACRRM)</option>
+              <option>GP Registrar</option>
+              <option>Registered Nurse (RN)</option>
+              <option>Enrolled Nurse (EN)</option>
+              <option>Practice Manager</option>
+              <option>Receptionist / Admin</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell Us About Yourself</label>
+            <textarea name="message" placeholder="Brief background, qualifications, and why you'd like to join the BMC team…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-navy form-submit">Send Expression of Interest →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-emergency">
+      ⚠️ <strong>Emergency?</strong> Call <strong>000</strong> immediately. &nbsp;|&nbsp;
+      After-hours: <strong>13 HEALTH (13 43 25 84)</strong> &nbsp;|&nbsp;
+      Beaudesert Hospital ED: Tina Street, Beaudesert.
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+        <p>Serving our community for over 50 years with comprehensive, compassionate family healthcare for Beaudesert and the Scenic Rim.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/beaudesertmedicalcentre" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">General Consultations</a></li>
+          <li><a href="services.html">Chronic Disease</a></li>
+          <li><a href="services.html">Women's Health</a></li>
+          <li><a href="services.html">Skin &amp; Skin Cancer</a></li>
+          <li><a href="services.html">Mental Health</a></li>
+          <li><a href="services.html">Paediatrics</a></li>
+          <li><a href="services.html">Minor Surgery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Team</h4>
+        <ul class="footer-links">
+          <li><a href="team.html">Dr Michael Rice</a></li>
+          <li><a href="team.html">Dr Tom Mulcahy</a></li>
+          <li><a href="team.html">Dr Jaime Hurley</a></li>
+          <li><a href="team.html">Dr Imran Ali</a></li>
+          <li><a href="team.html">Dr Dilshaayee Prabaharan</a></li>
+          <li><a href="team.html">Dr Navin Raveendran</a></li>
+          <li><a href="team.html">Mara &amp; Annette (Nurses)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="https://automedsystems.com.au/" target="_blank" rel="noopener">Book Online</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="careers.html">Work With Us</a></li>
+          <li><a href="contact.html">Getting Here</a></li>
+          <li><a href="tel:0755411422">(07) 5541 1422</a></li>
+          <li><a href="mailto:reception@beaumed.com.au">reception@beaumed.com.au</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Beaudesert Medical Centre. All rights reserved.</p>
+      <p>This website is for general information only and does not constitute medical advice. In an emergency, call 000.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

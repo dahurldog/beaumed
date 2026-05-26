@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fees and billing at Beaudesert Medical Centre — bulk-billed services, pensioner discounts, standard fees, and Medicare information.">
+  <title>Fees &amp; Billing | Beaudesert Medical Centre</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-top">
+      <a href="index.html" class="nav-logo">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+      </a>
+      <div class="nav-top-actions">
+        <a href="tel:0755411422" class="nav-phone">📞 (07) 5541 1422</a>
+        <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="nav-book">📅 Book Online</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="fees.html" class="active">Fees</a></li>
+        <li><a href="careers.html">Work With Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="services.html" onclick="closeMenu()">Services</a>
+  <a href="team.html" onclick="closeMenu()">Our Team</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="fees.html" onclick="closeMenu()">Fees</a>
+  <a href="careers.html" onclick="closeMenu()">Work With Us</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="https://automedsystems.com.au/" target="_blank" rel="noopener" class="m-book">📅 Book Online</a>
+</div>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="page-hero-eyebrow">Transparent Pricing</div>
+      <h1>Fees &amp; Billing</h1>
+      <p>We aim to make healthcare as accessible as possible. Many services are bulk-billed, and we offer pensioner discounts. If you're unsure, just ask.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- BULK BILLING -->
+<section class="section" style="background:var(--white)">
+  <div class="container">
+
+    <div class="bulk-bill-band fade-up">
+      <h3>✅ Bulk-Billed Services</h3>
+      <p>BMC bulk-bills the following services — meaning no out-of-pocket cost to you for these appointments:</p>
+      <ul id="bulkBillList">
+        <li>Children's scheduled immunisations</li>
+        <li>WorkCover appointments</li>
+        <li>Veteran's Affairs (DVA) appointments</li>
+        <li>Most GP Management Plans (GPMP)</li>
+        <li>Team Care Arrangements (TCA)</li>
+        <li>Mental Health Treatment Plans</li>
+        <li>3–4 monthly chronic disease checkups (for eligible patients on plans)</li>
+        <li>Over-75 health checks</li>
+        <li>ATSI health checks and chronic disease management</li>
+      </ul>
+    </div>
+
+    <!-- Dynamic fee schedule (populated from /api/fees) -->
+    <div id="feeScheduleWrap" style="display:none; margin-bottom:2rem">
+      <div class="fee-schedule-band fade-up">
+        <h3>💲 Current Fee Schedule</h3>
+        <p id="feeScheduleIntro" style="margin-bottom:1.25rem;color:var(--grey);font-size:.9rem"></p>
+        <table class="fee-table" id="feeTable">
+          <thead><tr><th>Service</th><th style="text-align:right">Fee</th></tr></thead>
+          <tbody id="feeTableBody"></tbody>
+        </table>
+        <p id="feeNotice" style="margin-top:1rem;font-size:.875rem;color:var(--grey)"></p>
+        <p id="feeUpdated" style="margin-top:.5rem;font-size:.75rem;color:#94a3b8"></p>
+      </div>
+    </div>
+
+    <div class="fees-grid">
+      <div class="fee-card fade-up">
+        <div class="fee-card-icon">💳</div>
+        <h3>Pensioner Discounts</h3>
+        <p>We offer a substantial discount for pensioners whose appointments are not one of the types we bulk-bill.</p>
+        <p>Please present your concession card at reception when you arrive. If you're not sure whether you qualify, our reception team is happy to help.</p>
+      </div>
+
+      <div class="fee-card fade-up">
+        <div class="fee-card-icon">⚖️</div>
+        <h3>Standard Fees &amp; Gaps</h3>
+        <p>Fees vary according to the duration and complexity of your time with your doctor, and whether additional services are required — such as ECG, lung function testing or freezing of skin spots.</p>
+        <p>We process your Medicare rebate immediately — in most cases before you leave the building.</p>
+      </div>
+
+      <div class="fee-card fade-up">
+        <div class="fee-card-icon">💰</div>
+        <h3>Ways to Pay</h3>
+        <p>We accept the following payment methods:</p>
+        <div class="payment-methods">
+          <span class="payment-chip">💵 Cash</span>
+          <span class="payment-chip">💳 Credit Card</span>
+          <span class="payment-chip">💳 Debit Card</span>
+          <span class="payment-chip">🏦 EFTPOS</span>
+        </div>
+        <p style="margin-top:1rem">Medicare rebates are processed straight away — via debit card back into a cheque or savings account, or electronically into your bank account.</p>
+      </div>
+
+      <div class="fee-card fade-up">
+        <div class="fee-card-icon">🐄</div>
+        <h3>Q Fever</h3>
+        <p>Special pricing applies to Q fever testing and immunisation (two visits required). Please check with reception when booking.</p>
+        <p>Employer enquiries for group testing and immunisation: <a href="mailto:manager@beaumed.com.au" style="color:var(--blue);font-weight:600">manager@beaumed.com.au</a></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MEDICARE INFO -->
+<section class="section" style="background:var(--light)">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="eyebrow">Medicare</span>
+      <h2>Medicare &amp; Chronic Disease Plans</h2>
+      <p>Understanding your Medicare entitlements can significantly reduce the cost of your healthcare.</p>
+    </div>
+    <div style="max-width:860px; margin:0 auto">
+      <div class="medicare-info fade-up">
+        <h3>What is a GP Management Plan?</h3>
+        <p>If you have a disease or condition that will be present for more than 6 months, or that is terminal, you may be eligible for a <strong>Chronic Disease Plan (GP Management Plan)</strong>.</p>
+        <p>Patients on plans can have a regular checkup every 3–6 months, and BMC bulk-bills for these because Medicare pays better rebates for staying well-organised.</p>
+        <p>If you need treatment from 2 or more health professionals, you may be eligible for a <strong>Team Care Arrangement (TCA)</strong>. This involves a regular checkup every 3–6 months and offers better Medicare rebates when your care is coordinated.</p>
+        <p>If you are on a Team Care Arrangement, Medicare rebates for <strong>up to 5 allied health visits per year</strong> are available to you — including physiotherapy, dietetics, podiatry and psychology. Your doctor or nurse will authorise these at your regular checkup.</p>
+        <p>To register your bank account details with Medicare for direct rebate payments, call the Medicare general enquiries line on <strong>132 011</strong> (24 hours a day), or visit a service centre, or register through myGov / Express Plus Medicare app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-emergency">
+      ⚠️ <strong>Emergency?</strong> Call <strong>000</strong> immediately. &nbsp;|&nbsp;
+      After-hours: <strong>13 HEALTH (13 43 25 84)</strong> &nbsp;|&nbsp;
+      Beaudesert Hospital ED: Tina Street, Beaudesert.
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://beaumed.com.au/wp-content/uploads/2017/02/BMC_Logo2.png" alt="Beaudesert Medical Centre">
+        <p>Serving our community for over 50 years with comprehensive, compassionate family healthcare for Beaudesert and the Scenic Rim.</p>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/beaudesertmedicalcentre" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">General Consultations</a></li>
+          <li><a href="services.html">Special Services</a></li>
+          <li><a href="services.html">Prescriptions</a></li>
+          <li><a href="services.html">Visiting Specialists</a></li>
+          <li><a href="services.html">Q Fever Immunisation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Team</h4>
+        <ul class="footer-links">
+          <li><a href="team.html">Our Doctors</a></li>
+          <li><a href="team.html">Our Nurses</a></li>
+          <li><a href="team.html">Allied Health</a></li>
+          <li><a href="about.html">About BMC</a></li>
+          <li><a href="fees.html">Fees &amp; Billing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="https://automedsystems.com.au/" target="_blank" rel="noopener">Book Online</a></li>
+          <li><a href="careers.html">Work With Us</a></li>
+          <li><a href="contact.html">Getting Here</a></li>
+          <li><a href="tel:0755411422">(07) 5541 1422</a></li>
+          <li><a href="mailto:reception@beaumed.com.au">reception@beaumed.com.au</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Beaudesert Medical Centre. All rights reserved.</p>
+      <p>This website is for general information only and does not constitute medical advice. In an emergency, call 000.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Dynamic fees loading ──────────────────────────────────────
+(async function loadFees() {
+  try {
+    const r    = await fetch('/api/fees');
+    const data = await r.json();
+
+    // Bulk-billed list
+    if (data.bulkBilledItems && data.bulkBilledItems.length) {
+      const ul = document.getElementById('bulkBillList');
+      ul.innerHTML = data.bulkBilledItems.map(i => `<li>${esc(i)}</li>`).join('');
+    }
+
+    // Standard fees table
+    if (data.standardFees && data.standardFees.some(f => f.amount)) {
+      const tbody = document.getElementById('feeTableBody');
+      tbody.innerHTML = data.standardFees
+        .filter(f => f.name)
+        .map(f => `<tr><td>${esc(f.name)}</td><td style="text-align:right;font-weight:600">${esc(f.amount||'—')}</td></tr>`)
+        .join('');
+      document.getElementById('feeScheduleIntro').textContent =
+        'Fees vary by the length and complexity of your consultation. We process your Medicare rebate immediately in most cases.';
+      if (data.notice) {
+        document.getElementById('feeNotice').textContent = data.notice;
+      }
+      if (data.lastUpdated) {
+        document.getElementById('feeUpdated').textContent = 'Fee schedule last updated: ' + data.lastUpdated;
+      }
+      document.getElementById('feeScheduleWrap').style.display = '';
+    }
+  } catch(e) {
+    console.error('Fees load failed', e);
+  }
+})();
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+<script src="main.js"></script>
+</body>
+</html>
