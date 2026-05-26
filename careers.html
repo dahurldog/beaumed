@@ -112,33 +112,37 @@
       <div class="careers-form fade-up">
         <h3>Express Your Interest</h3>
         <p>Fill in the form below and our practice manager will be in touch about current or upcoming opportunities.</p>
-        <!--
-          UPDATE: Replace with a proper form handler.
-          Option 1 — Formspree (free): action="https://formspree.io/f/YOUR_FORM_ID"
-          Option 2 — keep mailto for simplicity (opens email client)
-        -->
-        <form action="mailto:reception@beaumed.com.au" method="post" enctype="text/plain">
+
+        <!-- Success state (hidden until submission) -->
+        <div id="careersSuccess" style="display:none; text-align:center; padding:2.5rem 1rem">
+          <div style="font-size:3rem; margin-bottom:1rem">✅</div>
+          <h3 style="color:var(--navy); margin-bottom:.75rem">Thanks — we've received your expression of interest!</h3>
+          <p style="color:var(--grey); margin-bottom:1.5rem">Our practice manager will be in touch soon. In the meantime, feel free to call us on <a href="tel:0755411422" style="color:var(--blue); font-weight:600">(07) 5541 1422</a>.</p>
+          <button onclick="resetCareersForm()" class="btn btn-navy" style="font-size:.9rem">Submit Another →</button>
+        </div>
+
+        <form id="careersForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label>First Name *</label>
-              <input type="text" name="firstname" placeholder="Jane" required>
+              <input type="text" id="cFirstname" placeholder="Jane" required>
             </div>
             <div class="form-group">
               <label>Last Name *</label>
-              <input type="text" name="lastname" placeholder="Smith" required>
+              <input type="text" id="cLastname" placeholder="Smith" required>
             </div>
           </div>
           <div class="form-group">
             <label>Email Address *</label>
-            <input type="email" name="email" placeholder="jane@email.com" required>
+            <input type="email" id="cEmail" placeholder="jane@email.com" required>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
-            <input type="tel" name="phone" placeholder="0400 000 000">
+            <input type="tel" id="cPhone" placeholder="0400 000 000">
           </div>
           <div class="form-group">
             <label>Role You're Interested In *</label>
-            <select name="role" required>
+            <select id="cRole" required>
               <option value="" disabled selected>Select a role…</option>
               <option>General Practitioner (FRACGP / FACRRM)</option>
               <option>GP Registrar</option>
@@ -151,9 +155,10 @@
           </div>
           <div class="form-group">
             <label>Tell Us About Yourself</label>
-            <textarea name="message" placeholder="Brief background, qualifications, and why you'd like to join the BMC team…"></textarea>
+            <textarea id="cMessage" placeholder="Brief background, qualifications, and why you'd like to join the BMC team…"></textarea>
           </div>
-          <button type="submit" class="btn btn-navy form-submit">Send Expression of Interest →</button>
+          <div id="careersError" style="display:none; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:.85rem 1rem; margin-bottom:1rem; color:#dc2626; font-size:.9rem"></div>
+          <button type="submit" class="btn btn-navy form-submit" id="careersBtn">Send Expression of Interest →</button>
         </form>
       </div>
 
@@ -221,6 +226,58 @@
   </div>
 </footer>
 
+<script>
+document.getElementById('careersForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn   = document.getElementById('careersBtn');
+  const errEl = document.getElementById('careersError');
+  errEl.style.display = 'none';
+
+  const body = {
+    firstname: document.getElementById('cFirstname').value.trim(),
+    lastname:  document.getElementById('cLastname').value.trim(),
+    email:     document.getElementById('cEmail').value.trim(),
+    phone:     document.getElementById('cPhone').value.trim(),
+    role:      document.getElementById('cRole').value,
+    message:   document.getElementById('cMessage').value.trim()
+  };
+
+  if (!body.firstname || !body.lastname || !body.email || !body.role) {
+    errEl.textContent = 'Please fill in all required fields (marked with *).';
+    errEl.style.display = '';
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const r    = await fetch('/api/careers', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(body)
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Something went wrong.');
+    document.getElementById('careersForm').style.display    = 'none';
+    document.getElementById('careersSuccess').style.display = '';
+  } catch (err) {
+    errEl.textContent  = err.message;
+    errEl.style.display = '';
+    btn.disabled    = false;
+    btn.textContent = 'Send Expression of Interest →';
+  }
+});
+
+function resetCareersForm() {
+  document.getElementById('careersForm').reset();
+  document.getElementById('careersForm').style.display    = '';
+  document.getElementById('careersSuccess').style.display = 'none';
+  document.getElementById('careersError').style.display   = 'none';
+  document.getElementById('careersBtn').disabled    = false;
+  document.getElementById('careersBtn').textContent = 'Send Expression of Interest →';
+}
+</script>
 <script src="main.js"></script>
 </body>
 </html>
