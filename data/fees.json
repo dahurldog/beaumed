@@ -1,5 +1,30 @@
 {
-  "lastUpdated": "2025-05-26",
+  "standardFees": [
+    {
+      "name": "Short consultation (< 10 min)",
+      "fee": "",
+      "rebate": "$42.85",
+      "gap": ""
+    },
+    {
+      "name": "Standard consultation (10–20 min)",
+      "fee": "",
+      "rebate": "$82.90",
+      "gap": ""
+    },
+    {
+      "name": "Long consultation (20–40 min)",
+      "fee": "",
+      "rebate": "$122.15",
+      "gap": ""
+    },
+    {
+      "name": "Extended consultation (40+ min)",
+      "fee": "",
+      "rebate": "$163.45",
+      "gap": ""
+    }
+  ],
   "bulkBilledItems": [
     "Children's scheduled immunisations",
     "WorkCover appointments",
@@ -11,11 +36,6 @@
     "Over-75 health checks",
     "ATSI health checks and chronic disease management"
   ],
-  "standardFees": [
-    { "name": "Brief consultation (Level A)", "amount": "" },
-    { "name": "Standard consultation (Level B)", "amount": "" },
-    { "name": "Long consultation (Level C)", "amount": "" },
-    { "name": "Prolonged consultation (Level D)", "amount": "" }
-  ],
-  "notice": ""
+  "notice": "",
+  "lastUpdated": "2025-05-27"
 }
