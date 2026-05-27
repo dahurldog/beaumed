@@ -4,7 +4,7 @@
   --text: #1e293b; --grey: #64748b;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--light); color: var(--text); font-size: 14px; line-height: 1.5; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--light); color: var(--text); font-size: 14px; line-height: 1.55; }
 a { color: var(--blue); text-decoration: none; }
 input, select, textarea, button { font-family: inherit; font-size: 14px; }
 
@@ -19,7 +19,7 @@ input, select, textarea, button { font-family: inherit; font-size: 14px; }
 }
 .auth-logo { text-align: center; margin-bottom: 1.25rem; }
 .auth-logo img { height: 64px; background: #fff; padding: 6px 10px; border-radius: 8px; }
-.auth-card h1 { text-align: center; font-size: 1.3rem; color: var(--navy); margin-bottom: .25rem; }
+.auth-card h1 { text-align: center; font-size: 1.3rem; font-family: 'Lora', Georgia, serif; font-weight: 600; font-style: italic; color: var(--navy); margin-bottom: .25rem; }
 .auth-card .sub { text-align: center; color: var(--grey); font-size: .85rem; margin-bottom: 1.75rem; }
 .error-msg { color: #dc2626; font-size: .82rem; text-align: center; margin-bottom: .75rem; min-height: 1.2em; }
 
@@ -60,8 +60,8 @@ input, select, textarea, button { font-family: inherit; font-size: 14px; }
   padding: 0 1.5rem; gap: 1.5rem; position: sticky; top: 0; z-index: 100;
   box-shadow: 0 2px 12px rgba(0,0,0,.25); flex-shrink: 0;
 }
-.header-logo { color: #fff; font-weight: 800; font-size: .95rem; white-space: nowrap; }
-.header-logo span { color: var(--blue); }
+.header-logo { color: #fff; font-family: 'Lora', Georgia, serif; font-weight: 600; font-style: italic; font-size: 1rem; white-space: nowrap; letter-spacing: -.01em; }
+.header-logo span { color: var(--blue); font-style: normal; font-family: 'DM Sans', system-ui, sans-serif; font-size: .75rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; vertical-align: middle; margin-left: .35rem; opacity: .7; }
 .header-nav { display: flex; gap: .2rem; flex: 1; }
 .nav-tab {
   background: none; border: none; cursor: pointer; color: rgba(255,255,255,.6);
@@ -81,13 +81,13 @@ input, select, textarea, button { font-family: inherit; font-size: 14px; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-.page-title { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
-.page-sub { color: var(--grey); font-size: .85rem; margin-bottom: 1.75rem; }
+.page-title { font-size: 1.35rem; font-weight: 600; font-family: 'Lora', Georgia, serif; font-style: italic; color: var(--navy); margin-bottom: .25rem; }
+.page-sub { color: var(--grey); font-size: .85rem; margin-bottom: 1.75rem; line-height: 1.6; }
 
 /* ── Cards ── */
 .card { background: #fff; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 1.25rem; }
 .card-header { padding: .9rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.card-header h3 { font-size: .9rem; font-weight: 700; color: var(--navy); }
+.card-header h3 { font-size: .9rem; font-weight: 600; color: var(--navy); }
 .card-body { padding: 1.25rem; }
 
 /* ── Fee list items ── */
